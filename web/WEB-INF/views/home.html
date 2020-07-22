@@ -1,0 +1,14 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <p>This is the home page</p>
+    <div th:each="strings, iter: ${list}">
+        <p th:text="${strings} + ${iter}"></p>
+    </div>
+</body>
+</html>
