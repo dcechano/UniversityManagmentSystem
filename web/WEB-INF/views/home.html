@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.css">
     <title>Home</title>
 </head>
 <body>
@@ -10,5 +11,7 @@
     <div th:each="strings, iter: ${list}">
         <p th:text="${strings} + ${iter}"></p>
     </div>
+
+    <a class="btn btn-primary">Link</a>
 </body>
 </html>
