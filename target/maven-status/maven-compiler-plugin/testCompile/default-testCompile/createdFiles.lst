@@ -1,0 +1,7 @@
+enumstests\TestEmploymentStatusConverter.class
+repotests\StaffMemberRepoTest.class
+enumstests\TestAcademicStatusConverter.class
+repotests\FacultyMemberRepoTest.class
+enumstests\TestAcademicStatus.class
+testconfig\TestConfig.class
+repotests\StudentRepoTest.class
