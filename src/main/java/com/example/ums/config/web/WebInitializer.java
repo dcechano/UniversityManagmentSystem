@@ -1,6 +1,7 @@
 package com.example.ums.config.web;
 
 import com.example.ums.config.RootConfig;
+import com.example.ums.config.security.SecurityConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -37,6 +38,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class};
+        return new Class[]{WebConfig.class, SecurityConfig.class};
     }
 }
