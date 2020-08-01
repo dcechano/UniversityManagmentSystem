@@ -12,13 +12,7 @@ public class BaseController {
 
     @RequestMapping
     public String home(Model model) {
-        List<String> list = List.of("String 1",
-                "String 2",
-                "String 3");
-
-        model.addAttribute("list", list);
-
-        return "home";
+        return "landing";
     }
 
 }

@@ -1,0 +1,27 @@
+#univ-name {
+    font-family: 'SansSerif', Arial, serif;
+    font-size: 20px;
+    text-align: center;
+    text-decoration-width: 100px;
+}
+
+.cursive {
+    font-family: 'Parisienne', cursive;
+    font-size: 45px;
+}
+
+body {
+    background-image: url("../images/Samoa.jpg");
+}
+
+#nav-logo {
+    font-family: 'Parisienne', cursive;
+}
+
+.nav-item {
+
+}
+
+.nav-item:hover{
+    background-color: #d4edda;
+}
