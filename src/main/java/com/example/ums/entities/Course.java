@@ -1,12 +1,8 @@
 package com.example.ums.entities;
 
 import com.example.ums.entities.person.impl.FacultyMember;
-import com.example.ums.entities.person.impl.Student;
-import com.example.ums.enums.Grade;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -22,6 +18,10 @@ public class Course extends AbstractEntity{
 
     @OneToMany(mappedBy = "course")
     private Set<CourseGrade> studentGrades;
+
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT")
+    private Department department;
 
     public Course() {
     }
@@ -48,6 +48,14 @@ public class Course extends AbstractEntity{
 
     public void setStudentGrades(Set<CourseGrade> studentGrades) {
         this.studentGrades = studentGrades;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override

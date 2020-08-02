@@ -6,6 +6,12 @@ import com.example.ums.entities.person.impl.StaffMember;
 import javax.persistence.*;
 import java.util.List;
 
+@NamedEntityGraph(
+        name = "department-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode(value = "courses")
+        }
+)
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department extends AbstractEntity {
@@ -21,6 +27,9 @@ public class Department extends AbstractEntity {
 
     @OneToMany(mappedBy = "department")
     private List<StaffMember> staff;
+
+    @OneToMany(mappedBy = "department")
+    private List<Course> courses;
 
     public Department() {
     }
@@ -57,13 +66,12 @@ public class Department extends AbstractEntity {
         this.staff = staff;
     }
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "name='" + name + '\'' +
-                ", programs=" + programs +
-                ", faculty=" + faculty +
-                ", staff=" + staff +
-                "} " + super.toString();
+    public List<Course> getCourses() {
+        return courses;
     }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
 }
