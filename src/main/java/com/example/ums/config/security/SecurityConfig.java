@@ -40,15 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/resources/**",
+        web.ignoring().antMatchers("/resources/**",
                 "/static/**");
     }
 
+//    TODO migrate to the CustomAuthentication handler
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/api/all").hasRole("ADMIN")
-                .mvcMatchers("/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest()
                 .authenticated()
                 .and()

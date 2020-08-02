@@ -9,17 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
 
-    ApplicationContext context;
-
-    public LoginController(ApplicationContext context) {
-        this.context = context;
-    }
-
     @RequestMapping
     public String login(Model model) {
-
-        String[] names = context.getBeanDefinitionNames();
-        model.addAttribute("beans", names);
         return "login";
     }
 

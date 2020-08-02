@@ -18,10 +18,14 @@ body {
     font-family: 'Parisienne', cursive;
 }
 
-.nav-item {
-
+li .nav-item {
+    margin: 0;
 }
 
 .nav-item:hover{
     background-color: #d4edda;
+}
+
+div .card {
+    opacity: 1;
 }
