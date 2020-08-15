@@ -1,9 +1,5 @@
 package com.example.ums.enums;
 
-import com.example.ums.enums.converter.EmploymentStatusConverter;
-
-import javax.persistence.AttributeConverter;
-
 public enum EmploymentStatus{
 
     PART_TIME("P"),
@@ -22,8 +18,4 @@ public enum EmploymentStatus{
         return code;
     }
 
-    public static EmploymentStatus getConstant(String code) {
-        AttributeConverter<EmploymentStatus, String> converter = new EmploymentStatusConverter();
-        return converter.convertToEntityAttribute(code);
-    }
 }
