@@ -22,6 +22,7 @@ public class CourseGrade {
     @JoinColumn(name = "COURSE_ID")
     private Course course;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "GRADE")
     private Grade grade;
 

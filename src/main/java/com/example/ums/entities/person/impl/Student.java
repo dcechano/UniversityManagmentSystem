@@ -1,17 +1,20 @@
 package com.example.ums.entities.person.impl;
 
-import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.Program;
 import com.example.ums.entities.person.Person;
 import com.example.ums.enums.AcademicStatus;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
+@NamedEntityGraph(
+        name = "course-grades",
+        attributeNodes = {
+                @NamedAttributeNode(value = "courseGrades")
+        }
+)
 @Entity
 @Table(name = "STUDENT")
 public class Student extends Person {

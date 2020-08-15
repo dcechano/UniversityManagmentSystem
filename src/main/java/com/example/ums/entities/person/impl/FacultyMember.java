@@ -7,7 +7,6 @@ import com.example.ums.enums.EmploymentStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -60,15 +59,5 @@ public class FacultyMember extends Person {
 
     public LocalDateTime getHiringDate() {
         return hiringDate;
-    }
-
-    @Override
-    public String toString() {
-        return "FacultyMember{" +
-                "courses=" + courses +
-                ", department=" + department +
-                ", status=" + status +
-                ", hiringDate=" + hiringDate +
-                "} " + super.toString();
     }
 }

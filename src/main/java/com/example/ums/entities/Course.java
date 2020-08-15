@@ -60,10 +60,9 @@ public class Course extends AbstractEntity{
 
     @Override
     public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", instructor=" + instructor +
-                ", studentGrades=" + studentGrades +
-                "} " + super.toString();
+        final StringBuilder sb = new StringBuilder("Course{");
+        sb.append("name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

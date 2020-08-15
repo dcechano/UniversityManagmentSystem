@@ -9,35 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
 
-    <title>Student Portal</title>
+    <title>Faculty Portal</title>
 </head>
 <body>
 
-    <div class="container my-5 mx-auto">
-
-        <!-- Announcements -->
-        <div class="card my-5">
-            <div class="card-header">
-                <p class="card-title">Announcements</p>
-            </div>
-            <div class="card-body">
-                <p class="card-text">This is an upcoming announcement!</p>
-                <a href="#" class="card-link">More info</a>
-            </div>
+<div class="container my-5 mx-auto">
+    <!--TODO Edit this page to be a Faculty portal-->
+    <!--TODO add functionality for checking courses, grading students, ect. -->
+    <!-- Announcements -->
+    <div class="card my-5">
+        <div class="card-header">
+            <p class="card-title">Announcements</p>
         </div>
-    <!-- Register for classes -->
-        <div class="card my-5">
-            <div class="card-header">
-                <p class="card-title">Manage Schedule</p>
-            </div>
-            <div class="card-body">
-                <div class="card-text">Register, add and drop classes here!</div>
-                <a class="card-link" th:href="@{/registration/manage}">Add/Drop classes</a>
-            </div>
+        <div class="card-body">
+            <p class="card-text">This is an upcoming announcement!</p>
+            <a href="#" class="card-link">More info</a>
         </div>
-    <!-- Current class schedule -->
-
-    <!-- Check grades -->
     </div>
+    <!-- Register for classes -->
+    <div class="card my-5">
+        <div class="card-header">
+            <p class="card-title">Manage Schedule</p>
+        </div>
+        <div class="card-body">
+            <div class="card-text">Register, add and drop classes here!</div>
+            <a class="card-link" th:href="@{/registration/manage}">Add/Drop classes</a>
+        </div>
+    </div>
+    <!-- Current class schedule -->
+    <p th:text="${faculty.getStatus().toString()}"></p>
+    <!-- Check grades -->
+</div>
 </body>
 </html>

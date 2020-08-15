@@ -3,7 +3,6 @@ package com.example.ums.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,6 +21,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.example.ums"})
 public class RootConfig {
 
+//  TODO Add init_students.sql and init_programs.sql once they are finished
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -29,7 +29,12 @@ public class RootConfig {
                 .setType(EmbeddedDatabaseType.H2)
                 .generateUniqueName(true)
                 .addScript("classpath:create_dbs.sql")
-                .addScript("classpath:init_dbs.sql")
+                .addScript("classpath:init_roles.sql")
+                .addScript("classpath:init_departments.sql")
+                .addScript("classpath:init_faculty_staff.sql")
+                .addScript("classpath:init_programs.sql")
+                .addScript("classpath:init_students.sql")
+                .addScript("classpath:init_courses.sql")
                 .build();
     }
 
@@ -66,10 +71,5 @@ public class RootConfig {
         factoryBean.afterPropertiesSet();
 
         return factoryBean.getNativeEntityManagerFactory();
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
     }
 }
