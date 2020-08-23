@@ -8,6 +8,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
+    <!-- TODO fix this so it displays the proper title -->
     <title>Hello World!</title>
     <!--<title th:text="${department.getName()} Department Courses"></title>-->
 </head>
@@ -20,6 +21,9 @@
                 <div th:each="course : ${department.getCourses()}">
                     <p class="card-text" th:text="${course.getName()}"></p>
                     <hr class="m-auto">
+                    <div class="btn btn-primary">
+                        <a th:href="@{add_course(course_id=${course.getId()})}" th:method="post">Register</a>
+                    </div>
                 </div>
             </div>
         </div>

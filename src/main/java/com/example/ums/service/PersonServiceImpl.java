@@ -41,10 +41,7 @@ public class PersonServiceImpl implements PersonService {
         if (person == null) {
             throw new UsernameNotFoundException("Could not find Person with username " + username);
         }
-        Logger logger = Logger.getLogger(getClass().toString());
-        for (Role role : person.getRoles()) {
-            logger.info("\n" + role.getRole().name());
-        }
+
         Collection<GrantedAuthority> grantedAuthorityRoles = person.getRoles().stream().map(
                 role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList());
 

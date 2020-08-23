@@ -16,9 +16,6 @@ public class Course extends AbstractEntity{
     @JoinColumn(name = "INSTRUCTOR")
     private FacultyMember instructor;
 
-    @OneToMany(mappedBy = "course")
-    private Set<CourseGrade> studentGrades;
-
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT")
     private Department department;
@@ -40,14 +37,6 @@ public class Course extends AbstractEntity{
 
     public void setInstructor(FacultyMember instructor) {
         this.instructor = instructor;
-    }
-
-    public Set<CourseGrade> getStudentGrades() {
-        return studentGrades;
-    }
-
-    public void setStudentGrades(Set<CourseGrade> studentGrades) {
-        this.studentGrades = studentGrades;
     }
 
     public Department getDepartment() {

@@ -5,10 +5,12 @@ import com.example.ums.repos.AbstractRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("unchecked")
+@Transactional
 public abstract class AbstractRepoImpl<T extends AbstractEntity> implements AbstractRepo<T> {
 
     private final Class<T> clazz;

@@ -12,12 +12,12 @@ public class CourseGrade {
     @EmbeddedId
     private CourseGradeKey id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @MapsId(value = "STUDENT_ID")
     @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @MapsId(value = "COURSE_ID")
     @JoinColumn(name = "COURSE_ID")
     private Course course;
@@ -26,9 +26,17 @@ public class CourseGrade {
     @Column(name = "GRADE")
     private Grade grade;
 
-    public CourseGrade() {
+    public CourseGrade(Long studentId, Long courseId, Course course) {
+        this.id = new CourseGradeKey(studentId, courseId);
+        this.course = course;
     }
 
+    public CourseGrade(CourseGradeKey courseGradeKey, Course course) {
+        this.id = courseGradeKey;
+        this.course = course;
+    }
+
+    public CourseGrade(){}
 
     public CourseGradeKey getId() {
         return id;

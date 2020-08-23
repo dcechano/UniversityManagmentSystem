@@ -13,15 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-// TODO finish making this class
 @Component
 public class CustomAuthentication implements AuthenticationSuccessHandler {
 
     PersonRepo personRepo;
 
+    Logger logger = Logger.getLogger(getClass().toString());
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+        logger.info("\ninside the CustomeAuthentication class!\n");
+
         String username = authentication.getName();
 
         Person person = personRepo.findByUsername(username);

@@ -14,6 +14,15 @@ public class CourseGradeKey implements Serializable {
     @Column(name = "COURSE_ID")
     private Long courseId;
 
+    public CourseGradeKey() {
+
+    }
+
+    public CourseGradeKey(Long studentId, Long courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

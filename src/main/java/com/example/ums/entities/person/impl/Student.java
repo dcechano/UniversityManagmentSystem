@@ -12,7 +12,14 @@ import java.util.Set;
 @NamedEntityGraph(
         name = "course-grades",
         attributeNodes = {
-                @NamedAttributeNode(value = "courseGrades")
+                @NamedAttributeNode(value = "courseGrades", subgraph = "student-course")
+        },
+        subgraphs = {
+                @NamedSubgraph(name = "student-course",
+                attributeNodes = {
+                        @NamedAttributeNode("student"),
+                        @NamedAttributeNode("course")
+                })
         }
 )
 @Entity
@@ -26,7 +33,7 @@ public class Student extends Person {
     @JoinColumn(name = "MAJOR")
     private Program major;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<CourseGrade> courseGrades;
 
     @Column(name = "STATUS")

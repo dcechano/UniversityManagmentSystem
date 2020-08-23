@@ -3,6 +3,7 @@ package com.example.ums.repos.impl;
 import com.example.ums.entities.Role;
 import com.example.ums.enums.RoleEnum;
 import com.example.ums.ex.EntityNotFoundException;
+import com.example.ums.repos.RoleRepo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
