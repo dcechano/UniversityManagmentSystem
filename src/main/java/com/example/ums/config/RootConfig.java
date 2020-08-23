@@ -53,7 +53,7 @@ public class RootConfig {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.put("hibernate.format_sql", true);
-        properties.put("hibernate.show_sql", true);
+        properties.put("hibernate.show_sql", false);
         properties.put("hibernate.max_fetch_depth", 3);
         properties.put("hibernate.jdbc.batch_size", 10);
         properties.put("hibernate.jdbc.fetch_size", 50);

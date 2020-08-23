@@ -45,43 +45,58 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //        }
     }
 
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**",
                 "/static/**");
     }
+//    TODO Remove this comment after you figure out why it skips the custom authentication but the other doesnst
 
-    //    TODO fix the allowed roles so that the Person "Tperson" saved in the database can view landing
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        http.authorizeRequests()
+//                .antMatchers("/**").hasAnyRole(
+//                        RoleEnum.ROLE_STUDENT.simpleName(),
+//                RoleEnum.ROLE_FACULTY_MEMBER.simpleName(),
+//                RoleEnum.ROLE_STAFF_MEMBER.simpleName())
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .formLogin()
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .loginPage("/login")
+//                .loginProcessingUrl("/userAuth")
+//                .successHandler(customAuthentication)
+//                .permitAll()
+//                .failureUrl("/login?auth_error=1")
+//                .defaultSuccessUrl("/", true)
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/")
+//                .and()
+//                .exceptionHandling().accessDeniedPage("/accessDenied")
+//                .and()
+//                .csrf().csrfTokenRepository(repo());
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-// TODO remove the substring() in the allowed roles and replace it with something more proper
-        http.authorizeRequests()
-                .antMatchers("/**").hasAnyRole(
-                        RoleEnum.ROLE_STUDENT.simpleName(),
-                RoleEnum.ROLE_FACULTY_MEMBER.simpleName(),
-                RoleEnum.ROLE_STAFF_MEMBER.simpleName())
 
-                .anyRequest()
-                .authenticated()
+        http.authorizeRequests()
+                .antMatchers("/*").hasAnyRole("STUDENT", "FACULTY_MEMBER", "STAFF_MEMBER")
                 .and()
                 .formLogin()
-                .usernameParameter("username")
-                .passwordParameter("password")
+                .loginPage("/login")
                 .loginProcessingUrl("/userAuth")
                 .successHandler(customAuthentication)
-                .loginPage("/login")
-                .failureUrl("/login?auth_error=1")
-                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied")
-                .and()
-                .csrf().csrfTokenRepository(repo());
+                .logout().permitAll();
+
     }
 
     @Bean

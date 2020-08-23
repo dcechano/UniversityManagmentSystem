@@ -9,5 +9,5 @@ public interface PersonRepo extends AbstractRepo<Person> {
 
     Person findByUsername(String username);
 
-    List<Role> findRolesById(Long id);
+
 }

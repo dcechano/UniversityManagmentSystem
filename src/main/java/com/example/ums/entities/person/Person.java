@@ -6,7 +6,7 @@ import com.example.ums.entities.Role;
 import javax.persistence.*;
 import java.util.List;
 
-
+@NamedEntityGraph(name = "person-roles", attributeNodes = {@NamedAttributeNode(value = "roles")})
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "PERSON")

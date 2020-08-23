@@ -8,20 +8,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
-    <title>Add/Drop Classes</title>
+
+    <title>Student Schedule</title>
 </head>
 <body>
-    <div class="container">
-        <div class="card my-5">
-            <div class="card-header">Select by Department</div>
-            <div class="card-body">
-                <div th:each="dep : ${departments}">
-                    <a class="card-text" th:href="@{show_courses(dep_id=${dep.getId()})}" th:text="${dep.getName()}"></a>
-                    <hr class="mb-2">
-                </div>
-            </div>
-            <a href="" th:href="@{}"></a>
-        </div>
-    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Course</th>
+            <th scope="col">Start Time</th>
+        </tr>
+        </thead>
+        <tbody th:each="course : ${courses}">
+        <tr>
+            <th scope="row" th:text="${course.getName()}">1</th>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
