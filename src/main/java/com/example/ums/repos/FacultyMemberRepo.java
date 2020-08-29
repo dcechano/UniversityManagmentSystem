@@ -5,10 +5,11 @@ import com.example.ums.entities.Department;
 import com.example.ums.entities.person.impl.FacultyMember;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FacultyMemberRepo extends AbstractRepo<FacultyMember> {
 
-    List<Course> getCoursesByFacultyId(Long facultyId);
+    Optional<FacultyMember> getFacultyMemberWithCourses(Long facultyId);
 
     long count();
 

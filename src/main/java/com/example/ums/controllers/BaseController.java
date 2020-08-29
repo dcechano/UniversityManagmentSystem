@@ -24,71 +24,19 @@ import java.util.logging.Logger;
 @RequestMapping("/")
 public class BaseController {
 
-    Logger logger;
-
-//    TODO remove any of these repos if they are unnecessary
-    @Autowired
-    PersonRepo personRepo;
-
-    @Autowired
-    DepartmentRepo departmentRepo;
-
-    @Autowired
-    RoleRepo roleRepo;
-
-    @Autowired
-    StudentRepo studentRepo;
-
-    public BaseController(PersonRepo personRepo, DepartmentRepo departmentRepo, RoleRepo roleRepo) {
-        this.personRepo = personRepo;
-        this.departmentRepo = departmentRepo;
-        this.roleRepo = roleRepo;
-    }
-
-    public BaseController() {
-        this.logger = Logger.getLogger(getClass().toString());
-    }
-
     @RequestMapping
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+        Person person = (Person) session.getAttribute("user");
+        model.addAttribute("user", person);
         return "landing";
     }
+
 //  TODO Remove? or at least move to a place more appropriate!
     @RequestMapping("/accessDenied")
     public String accessDenied() {
         return "accessDenied";
     }
 
-    // TODO Decide if theses portals merit their own controllers or if they should be deleted
-    @RequestMapping("/studentPortal")
-    public String studentPortal(Model model, @SessionAttribute("user") Person person) {
-        Optional<Student> studentOptional = studentRepo.findById(person.getId());
-        studentOptional.ifPresentOrElse(student -> {
-                    model.addAttribute("student", student);
-                },
-                () -> {
-                    throw new EntityNotFoundException("No Student found with Id: " + person.getId());
-                });
 
-        return "student_portal";
-    }
-
-//    TODO Fix this method: Either add as StudentPortal Controller or change mapping from /student/schedule
-    @RequestMapping("/student/schedule")
-    public String studentSchedule(@RequestParam("student_id") Long studentId, Model model){
-        Optional<Student> studentOptional = studentRepo.findStudentWithCourseGrades(studentId);
-        studentOptional.ifPresentOrElse(student -> {
-                    Set<CourseGrade> courseGrades = student.getCourseGrades();
-                    List<Course> courses = new ArrayList<>();
-                    for(CourseGrade courseGrade : courseGrades){
-                        courses.add(courseGrade.getCourse());
-                    }
-                    model.addAttribute("courses", courses);
-                },
-                () -> {
-                    throw new EntityNotFoundException("No Student found with Id: " + studentId);
-                });
-        return "student_schedule";
-    }
 
 }

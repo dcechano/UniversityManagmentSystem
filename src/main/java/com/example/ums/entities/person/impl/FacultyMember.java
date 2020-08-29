@@ -4,12 +4,15 @@ import com.example.ums.entities.Course;
 import com.example.ums.entities.Department;
 import com.example.ums.entities.person.Person;
 import com.example.ums.enums.EmploymentStatus;
+import jdk.jfr.Name;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NamedEntityGraph(name = "faculty-courses",
+    attributeNodes = {@NamedAttributeNode(value = "courses")})
 @Entity
 @Table(name = "FACULTYMEMBER")
 public class FacultyMember extends Person {

@@ -1,13 +1,13 @@
 package com.example.ums.repos.impl;
 
-import com.example.ums.entities.Course;
 import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.repos.FacultyMemberRepo;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
+import javax.persistence.EntityGraph;
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -18,11 +18,10 @@ public class FacultyMemberRepoImpl extends AbstractRepoImpl<FacultyMember> imple
     }
 
     @Override
-    public List<Course> getCoursesByFacultyId(Long facultyId) {
-        Query query = entityManager.createQuery(
-                "SELECT c FROM Course c WHERE c.instructor=" + facultyId
-        );
-        return (List<Course>) query.getResultList();
+    public Optional<FacultyMember> getFacultyMemberWithCourses(Long facultyId) {
+        EntityGraph<?> entityGraph = entityManager.getEntityGraph("faculty-courses");
+        FacultyMember facultyMember = entityManager.find(FacultyMember.class, facultyId, Map.of("javax.persistence.fetchgraph", entityGraph));
+        return Optional.ofNullable(facultyMember);
     }
 
     @Override

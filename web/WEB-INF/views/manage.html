@@ -20,8 +20,9 @@
                     <hr class="mb-2">
                 </div>
             </div>
-            <a href="" th:href="@{}"></a>
         </div>
+        <a href="" th:href="@{schedule}">Show Schedule</a>
+        <a href="" th:href="@{'/student_portal/' + ${student.getId()} + '/'}">Back to portal</a>
     </div>
 </body>
 </html>

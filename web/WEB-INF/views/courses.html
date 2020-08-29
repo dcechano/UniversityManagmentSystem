@@ -8,25 +8,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
-    <!-- TODO fix this so it displays the proper title -->
-    <title>Hello World!</title>
-    <!--<title th:text="${department.getName()} Department Courses"></title>-->
-</head>
 
+    <title>Courses</title>
+</head>
 <body>
- <div class="container">
-        <div class="card my-5">
-            <div class="card-header" th:text="${department.getName()}"></div>
-            <div class="card-body">
-                <div th:each="course : ${department.getCourses()}">
-                    <p class="card-text" th:text="${course.getName()}"></p>
-                    <hr class="m-auto">
-                    <button type="button" class="btn btn-primary d-inline block" th:href="@{add_course(course_id=${course.getId()})}">
-                        Register
-                    </button>
-                </div>
-            </div>
-        </div>
+
+<div class="container my-5 mx-auto">
+    <div th:each="course : ${courses}">
+        <p th:text="${course.getName()}"></p>
     </div>
+</div>
 </body>
 </html>

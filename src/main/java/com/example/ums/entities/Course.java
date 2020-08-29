@@ -3,7 +3,6 @@ package com.example.ums.entities;
 import com.example.ums.entities.person.impl.FacultyMember;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "COURSE")

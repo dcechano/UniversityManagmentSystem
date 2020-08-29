@@ -32,7 +32,7 @@
             </div>
             <div class="card-body">
                 <div class="card-text">Register, add and drop classes here!</div>
-                <a class="card-link" th:href="@{/registration/manage}">Add/Drop classes</a>
+                <a class="card-link" th:href="@{manage}">Add/Drop classes</a>
             </div>
         </div>
     <!-- TODO add link for Current class schedule -->
@@ -42,7 +42,7 @@
             </div>
             <div class="card-body">
                 <div class="card-text">View Schedule</div>
-                <a class="card-link" th:href="@{/student/schedule(student_id=${student.getId()})}">Show Schedule</a>
+                <a class="card-link" th:href="@{schedule}">Show Schedule</a>
             </div>
         </div>
 

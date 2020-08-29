@@ -96,12 +96,4 @@ public class FacultyMemberRepoTest {
         assertEquals(count, 2);
     }
 
-    @Test
-    public void getCourseByFacultyIdTest() {
-        List<Course> courses = facultyMemberRepo.getCoursesByFacultyId(1L);
-        assertNotNull(courses);
-        Course topology = courses.get(0);
-        assertNotNull(topology);
-        assertEquals(topology.getName(), "Intro to Topology");
-    }
 }

@@ -21,7 +21,6 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.example.ums"})
 public class RootConfig {
 
-//  TODO Add init_students.sql and init_programs.sql once they are finished
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
