@@ -18,8 +18,6 @@ import java.util.logging.Logger;
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     Logger logger = Logger.getLogger(getClass().toString());
 
-    PersonRepo personRepo;
-
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -34,8 +32,4 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     }
 
-    @Autowired
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
 }
