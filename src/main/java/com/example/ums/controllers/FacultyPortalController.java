@@ -1,6 +1,10 @@
 package com.example.ums.controllers;
 
+import com.example.ums.entities.Course;
+import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.person.impl.FacultyMember;
+import com.example.ums.entities.person.impl.Student;
+import com.example.ums.enums.Grade;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseRepo;
 import com.example.ums.repos.FacultyMemberRepo;
@@ -9,7 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @SessionAttributes(value = "faculty")
 @Controller
@@ -35,8 +44,30 @@ public class FacultyPortalController {
 
     @GetMapping("/courses")
     public String facultyCourses(Model model, @ModelAttribute("faculty") FacultyMember member) {
-        model.addAttribute("courses", member.getCourses());
+        List<Course> courses = new ArrayList<>();
+        for (Course course : member.getCourses()) {
+            courses.add(courseRepo.findCourseByIdWithStudents(course.getId()));
+        }
+        model.addAttribute("courses", courses);
         return "courses";
+    }
+
+    @GetMapping("/grades")
+    public String gradeStudents(Model model, @RequestParam("course_id") Long courseId) {
+        List<CourseGrade> courseGrades = courseRepo.getCourseGradesByCourseId(courseId);
+        courseGrades = courseGrades.stream()
+                .sorted(Comparator.comparing(o -> o.getStudent().getLastName()))
+                .collect(Collectors.toList());
+
+
+        model.addAttribute("courseGrades", courseGrades);
+        model.addAttribute("newStudent", new Student());
+        return "grades";
+    }
+
+    @PostMapping("/process_data")
+    public String processData(@ModelAttribute("newStudent") Student student) {
+        return null;
     }
 
     @Autowired

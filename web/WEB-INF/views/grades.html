@@ -9,16 +9,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
 
-    <title>Faculty Portal</title>
+    <title>Grades</title>
 </head>
 <body>
 
 <div class="container my-5 mx-auto">
-    <!--TODO add functionality for checking courses, grading students, ect. -->
-    <div>
-        <a href="" th:href="@{courses}">Show courses</a>
+    <h1 th:text="${courseGrades.get(0).getCourse().getName()}"></h1>
+
+    <form action="" th:action="@{process_data}" method="post" th:object="${newStudent}">
+
+        <label for="studentId">ID: </label>
+        <input type="number" id="studentId" th:for="stude">
+
+    </form>
+
+    <div th:each="courseGrade : ${courseGrades}">
+
+        <p th:text="${courseGrade.getStudent().getLastName()}"></p>
+        <p th:text="${courseGrade.getGrade() == null ? 'A' : courseGrade.getGrade()}"></p>
+        <select name="Grade">
+            <option th:each="grade : ${T(com.example.ums.enums.Grade).values()}"
+                th:value="${grade}" th:text="${grade.getCode()}">
+            </option>
+        </select>
     </div>
-    <!-- Check grades -->
 </div>
 </body>
 </html>

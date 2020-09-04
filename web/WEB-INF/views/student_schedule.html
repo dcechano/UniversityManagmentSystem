@@ -12,7 +12,7 @@
     <title>Student Schedule</title>
 </head>
 <body>
-
+    <!--TODO Fix this table! -->
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +22,8 @@
         </thead>
         <tbody th:each="course : ${courses}">
         <tr>
-            <th scope="row" th:text="${course.getName()}">1</th>
+            <td th:text="${course.getName()}"></td>
+            <td th:text="${course.getInstructor().getLastName()}"></td>
         </tr>
         </tbody>
     </table>

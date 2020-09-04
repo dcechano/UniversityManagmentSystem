@@ -1,9 +1,13 @@
 package com.example.ums.entities;
 
 import com.example.ums.entities.person.impl.FacultyMember;
+import com.example.ums.entities.person.impl.Student;
 
 import javax.persistence.*;
+import java.util.List;
 
+@NamedEntityGraph(name = "course-students",
+    attributeNodes = @NamedAttributeNode("students"))
 @Entity
 @Table(name = "COURSE")
 public class Course extends AbstractEntity{
@@ -18,6 +22,12 @@ public class Course extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT")
     private Department department;
+
+    @ManyToMany
+    @JoinTable(name = "COURSE_GRADE",
+        joinColumns = @JoinColumn(name = "COURSE_ID"),
+        inverseJoinColumns = @JoinColumn(name = "STUDENT_ID"))
+    private List<Student> students;
 
     public Course() {
     }
@@ -44,6 +54,14 @@ public class Course extends AbstractEntity{
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.example.ums.repos.impl;
 
+import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.repos.FacultyMemberRepo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityGraph;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
