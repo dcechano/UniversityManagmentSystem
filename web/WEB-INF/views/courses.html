@@ -15,7 +15,14 @@
 
 <div class="container my-5 mx-auto">
     <div th:each="course : ${courses}">
-        <p th:text="${course.getName()}"></p>
+        <p class="h5" th:text="${course.getName()}"></p>
+
+        <div th:each="student : ${course.getStudents()}">
+            <p th:text="${student.getLastName()}"></p>
+        </div>
+        <div>
+            <a th:href="@{grades(course_id=${course.getId()})}">Grades</a>
+        </div>
     </div>
 </div>
 </body>

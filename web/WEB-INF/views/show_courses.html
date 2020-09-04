@@ -12,7 +12,6 @@
     <title>Hello World!</title>
     <!--<title th:text="${department.getName()} Department Courses"></title>-->
 </head>
-
 <body>
  <div class="container">
         <div class="card my-5">
@@ -21,9 +20,9 @@
                 <div th:each="course : ${department.getCourses()}">
                     <p class="card-text" th:text="${course.getName()}"></p>
                     <hr class="m-auto">
-                    <button type="button" class="btn btn-primary d-inline block" th:href="@{add_course(course_id=${course.getId()})}">
+                    <a class="btn btn-primary d-inline block" th:href="@{add_course(course_id=${course.getId()})}">
                         Register
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
