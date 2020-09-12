@@ -7,6 +7,7 @@ import com.example.ums.enums.AcademicStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @NamedEntityGraph(
@@ -34,17 +35,17 @@ public class Student extends Person {
     private Program major;
 
     @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<CourseGrade> courseGrades;
+    private List<CourseGrade> courseGrades;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private AcademicStatus status;
 
-    public Set<CourseGrade> getCourseGrades() {
+    public List<CourseGrade> getCourseGrades() {
         return courseGrades;
     }
 
-    public void setCourseGrades(Set<CourseGrade> courseGrades) {
+    public void setCourseGrades(List<CourseGrade> courseGrades) {
         this.courseGrades = courseGrades;
     }
 

@@ -13,19 +13,21 @@
 </head>
 <body>
     <!--TODO Fix this table! -->
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Course</th>
-            <th scope="col">Start Time</th>
-        </tr>
-        </thead>
-        <tbody th:each="course : ${courses}">
-        <tr>
-            <td th:text="${course.getName()}"></td>
-            <td th:text="${course.getInstructor().getLastName()}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Course</th>
+                <th scope="col">Instructor</th>
+            </tr>
+            </thead>
+            <tbody th:each="item : ${schedule}">
+            <tr>
+                <td th:text="${item.course}"></td>
+                <td th:text="${item.instructor}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

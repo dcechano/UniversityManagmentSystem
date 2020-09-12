@@ -41,18 +41,18 @@ public abstract class AbstractRepoImpl<T extends AbstractEntity> implements Abst
     }
 
     @Override
-    public T update(T entity) {
+    public T merge(T entity) {
         return entityManager.merge(entity);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Object id) {
         var entity = entityManager.find(clazz, id);
         entityManager.remove(entity);
     }
 
     @Override
-    public Optional<T> findById(Long id) {
+    public Optional<T> findById(Object id) {
         var entity = entityManager.find(clazz, id);
         return Optional.ofNullable(entity);
     }

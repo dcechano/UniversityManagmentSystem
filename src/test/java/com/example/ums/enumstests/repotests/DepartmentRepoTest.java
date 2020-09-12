@@ -1,4 +1,4 @@
-package repotests;
+package com.example.ums.enumstests.repotests;
 
 import com.example.ums.config.RootConfig;
 import com.example.ums.config.security.SecurityConfig;

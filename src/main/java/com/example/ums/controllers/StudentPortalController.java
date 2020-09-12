@@ -3,24 +3,20 @@ package com.example.ums.controllers;
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.Department;
-import com.example.ums.entities.person.Person;
+import com.example.ums.entities.ScheduleDTO;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseRepo;
 import com.example.ums.repos.DepartmentRepo;
-import com.example.ums.repos.PersonRepo;
 import com.example.ums.repos.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.logging.Logger;
 
 @Controller
 @SessionAttributes(names = {"user", "student"})
@@ -37,6 +33,7 @@ public class StudentPortalController {
     @GetMapping
     public String studentPortal(@PathVariable("id") Long id, Model model) {
         Optional<Student> studentOptional = studentRepo.findStudentWithCourseGrades(id);
+
         studentOptional.ifPresentOrElse((student) -> model.addAttribute("student", student),
                 () -> {
                     throw new EntityNotFoundException("Student with Id: " + id + " could not be found");
@@ -45,14 +42,10 @@ public class StudentPortalController {
     }
 
     @GetMapping("/schedule")
-    public String studentSchedule(Model model, @ModelAttribute("student") Student student){
-        Set<CourseGrade> courseGrades = student.getCourseGrades();
-        List<Course> courses = new ArrayList<>();
-        for(CourseGrade courseGrade : courseGrades){
-            courses.add(courseGrade.getCourse());
-        }
-
-        model.addAttribute("courses", courses);
+    public String studentSchedule(Model model, @PathVariable("id") Long id ,@ModelAttribute("student") Student student){
+        List<ScheduleDTO> schedule = courseRepo.findScheduleByStudentId(student.getId());
+//        List<CourseGrade> courses = courseRepo.getCourseGradesByCourseId(id);
+        model.addAttribute("schedule", schedule);
         return "student_schedule";
     }
 
@@ -81,10 +74,10 @@ public class StudentPortalController {
 
             Optional<Course> courseOptional = courseRepo.findById(courseId);
             courseOptional.ifPresentOrElse(course -> {
-                        Set<CourseGrade> courseGrades = student.getCourseGrades();
+                        List<CourseGrade> courseGrades = student.getCourseGrades();
                         CourseGrade courseGrade = new CourseGrade(student.getId(), courseId, course);
                         courseGrades.add(courseGrade);
-                        studentRepo.update(student);
+                        studentRepo.merge(student);
                     },
                     () -> {
                         throw new EntityNotFoundException("Course with Id: " + courseId + " could not be found");});

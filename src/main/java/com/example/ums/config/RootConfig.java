@@ -34,6 +34,7 @@ public class RootConfig {
                 .addScript("classpath:init_programs.sql")
                 .addScript("classpath:init_students.sql")
                 .addScript("classpath:init_courses.sql")
+                .addScript("classpath:init_course_grades.sql")
                 .build();
     }
 

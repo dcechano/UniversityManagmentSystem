@@ -7,17 +7,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "COURSE_GRADE")
-public class CourseGrade {
+public class CourseGrade{
 
     @EmbeddedId
     private CourseGradeKey id;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @MapsId(value = "STUDENT_ID")
     @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @MapsId(value = "COURSE_ID")
     @JoinColumn(name = "COURSE_ID")
     private Course course;

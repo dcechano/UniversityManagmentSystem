@@ -12,11 +12,11 @@ public interface AbstractRepo<T extends AbstractEntity> {
 
     void delete(T entity);
 
-    T update(T entity);
+    T merge(T entity);
 
-    void deleteById(Long id);
+    void deleteById(Object id);
 
-    Optional<T> findById(Long id);
+    Optional<T> findById(Object id);
 
     List<T> findAll();
 }
