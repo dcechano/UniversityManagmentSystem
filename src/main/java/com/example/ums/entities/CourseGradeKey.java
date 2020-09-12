@@ -52,4 +52,13 @@ public class CourseGradeKey implements Serializable {
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CourseGradeKey{");
+        sb.append("studentId=").append(studentId);
+        sb.append(", courseId=").append(courseId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

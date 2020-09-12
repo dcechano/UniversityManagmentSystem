@@ -14,25 +14,38 @@
 <body>
 
 <div class="container my-5 mx-auto">
-    <h1 th:text="${courseGrades.get(0).getCourse().getName()}"></h1>
+    <h1 class="h1" th:text="${courseGrades.get(0).getCourse().getName()}"></h1>
 
-    <form action="" th:action="@{process_data}" method="post" th:object="${newStudent}">
-
-        <label for="studentId">ID: </label>
-        <input type="number" id="studentId" th:for="stude">
-
+    <form class="form" action="#" th:action="@{process_data}" th:object="${form}" method="post">
+        <fieldset>
+            <input type="submit" th:value="Save">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Course Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="course, itemStat : *{courseGrades}">
+                        <td><input type="hidden" th:field="*{courseGrades[__${itemStat.index}__].id.courseId}"></td>
+                        <td><input type="hidden" th:field="*{courseGrades[__${itemStat.index}__].id.studentId}"></td>
+                        <td th:text="${courseGrades[__${itemStat.index}__].student.firstName}"></td>
+                        <td th:text="${courseGrades[__${itemStat.index}__].student.lastName}"></td>
+                        <td>
+                            <label>
+                                <select name="Grade" th:field="*{courseGrades[__${itemStat.index}__].grade}">
+                                    <option th:each="gradeVal : ${T(com.example.ums.enums.Grade).values()}"
+                                            th:value="${gradeVal}" th:text="${gradeVal.getCode()}">
+                                    </option>
+                                </select>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
     </form>
-
-    <div th:each="courseGrade : ${courseGrades}">
-
-        <p th:text="${courseGrade.getStudent().getLastName()}"></p>
-        <p th:text="${courseGrade.getGrade() == null ? 'A' : courseGrade.getGrade()}"></p>
-        <select name="Grade">
-            <option th:each="grade : ${T(com.example.ums.enums.Grade).values()}"
-                th:value="${grade}" th:text="${grade.getCode()}">
-            </option>
-        </select>
-    </div>
 </div>
 </body>
 </html>
