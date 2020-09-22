@@ -3,11 +3,12 @@ package com.example.ums.entities;
 import com.example.ums.enums.RoleEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "ROLES")
-public class Role{
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

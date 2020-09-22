@@ -1,6 +1,5 @@
 package com.example.ums.config.security;
 
-import com.example.ums.enums.RoleEnum;
 import com.example.ums.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,22 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
-        //        TODO remove these comments later
-        //
-        //                try {
-        //            PasswordEncoder passwordEncoder = passwordEncoder();
-        //            auth.inMemoryAuthentication()
-        //                    .passwordEncoder(passwordEncoder)
-        //                    .withUser("dylan")
-        //                    .password(passwordEncoder.encode("password"))
-        //                    .roles("USER")
-        //                    .and()
-        //                    .withUser("admin")
-        //                    .password(passwordEncoder.encode("password"))
-        //                    .roles("USER, ADMIN");
-        //        } catch (Exception e) {
-        //            throw new ConfigurationException("In-Memory authentication was not configured.");
-        //        }
     }
 
     @Override
@@ -87,7 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/*").hasAnyRole("STUDENT", "FACULTY_MEMBER", "STAFF_MEMBER")
+                .antMatchers("/").permitAll()
+                .antMatchers("/student_portal/**").hasAnyRole("STUDENT")
+                .antMatchers("faculty_portal/**").hasAnyRole("FACULTY")
                 .and()
                 .formLogin()
                 .loginPage("/login")

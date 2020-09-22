@@ -3,7 +3,8 @@ package com.example.ums.enums;
 public enum RoleEnum {
     ROLE_STUDENT,
     ROLE_FACULTY_MEMBER,
-    ROLE_STAFF_MEMBER;
+    ROLE_STAFF_MEMBER,
+    ROLE_ADMIN;
 
     RoleEnum() {
     }

@@ -32,7 +32,8 @@ public class Person extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     protected List<Role> roles;
 
-    protected Person() {
+//    TODO consider how to fix this constructor to facilitate construction of a new Person via Service
+    public Person() {
     }
 
     public String getUsername() {
@@ -77,10 +78,13 @@ public class Person extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", version=" + version +
-                "} " + super.toString();
+        final StringBuilder sb = new StringBuilder("Person{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", id=").append(id);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -14,27 +14,32 @@
 <body>
 
 <div class="container my-5 mx-auto">
-    <h1 class="h1" th:text="${courseGrades.get(0).getCourse().getName()}"></h1>
+    <div class="d-flex justify-content-between" th:object="${courseGrades.get(0).getCourse()}">
+        <span class="h3" th:text="*{name}"></span>
+        <span class="h5" th:text="${session.faculty.getFirstName() + ' ' + session.faculty.getLastName()}"></span>
+    </div>
 
     <form class="form" action="#" th:action="@{process_data}" th:object="${form}" method="post">
         <fieldset>
-            <input type="submit" th:value="Save">
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Student Name</th>
-                        <th>Course Name</th>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Grade</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="course, itemStat : *{courseGrades}">
-                        <td><input type="hidden" th:field="*{courseGrades[__${itemStat.index}__].id.courseId}"></td>
-                        <td><input type="hidden" th:field="*{courseGrades[__${itemStat.index}__].id.studentId}"></td>
+                        <td hidden="hidden"><input hidden th:field="*{courseGrades[__${itemStat.index}__].id.studentId}"></td>
+                        <td th:text="*{courseGrades[__${itemStat.index}__].id.studentId}"></td>
+                        <td hidden><input type="hidden" th:field="*{courseGrades[__${itemStat.index}__].id.courseId}"></td>
                         <td th:text="${courseGrades[__${itemStat.index}__].student.firstName}"></td>
                         <td th:text="${courseGrades[__${itemStat.index}__].student.lastName}"></td>
                         <td>
                             <label>
-                                <select name="Grade" th:field="*{courseGrades[__${itemStat.index}__].grade}">
+                                <select class="custom-select-sm" name="Grade" th:field="*{courseGrades[__${itemStat.index}__].grade}">
                                     <option th:each="gradeVal : ${T(com.example.ums.enums.Grade).values()}"
                                             th:value="${gradeVal}" th:text="${gradeVal.getCode()}">
                                     </option>
@@ -44,6 +49,7 @@
                     </tr>
                 </tbody>
             </table>
+            <input type="submit" th:value="Save">
         </fieldset>
     </form>
 </div>

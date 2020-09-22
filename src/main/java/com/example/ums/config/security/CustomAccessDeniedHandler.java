@@ -1,8 +1,5 @@
 package com.example.ums.config.security;
 
-import com.example.ums.entities.person.Person;
-import com.example.ums.repos.PersonRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

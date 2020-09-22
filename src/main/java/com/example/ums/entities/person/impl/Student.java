@@ -8,7 +8,6 @@ import com.example.ums.enums.AcademicStatus;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @NamedEntityGraph(
         name = "course-grades",
@@ -25,6 +24,7 @@ import java.util.Set;
 )
 @Entity
 @Table(name = "STUDENT")
+@PrimaryKeyJoinColumn(name = "ID")
 public class Student extends Person {
 
     @Column(name = "ENROLLMENT_DATE")
@@ -40,6 +40,10 @@ public class Student extends Person {
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private AcademicStatus status;
+
+//    TODO fix these to constructors to facilitate a creation via a StudentService
+    public Student() {
+    }
 
     public List<CourseGrade> getCourseGrades() {
         return courseGrades;

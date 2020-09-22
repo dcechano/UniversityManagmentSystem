@@ -1,7 +1,5 @@
 package com.example.ums.entities;
 
-import com.example.ums.entities.person.impl.Student;
-
 public class ScheduleDTO {
     private String course;
     private String instructor;

@@ -33,3 +33,11 @@ div .card {
 .jumbotron {
     background-image: url("../images/sailor2.jpg");
 }
+
+a:visited{
+    color: #0056b3;
+}
+
+a{
+    color: #0056b3;
+}

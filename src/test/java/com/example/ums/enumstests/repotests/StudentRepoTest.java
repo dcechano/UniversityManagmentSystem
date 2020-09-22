@@ -1,6 +1,8 @@
 package com.example.ums.enumstests.repotests;
 
 import com.example.ums.config.RootConfig;
+import com.example.ums.config.security.SecurityConfig;
+import com.example.ums.config.web.WebConfig;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.repos.StudentRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +21,7 @@ import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {RootConfig.class})
+@ContextConfiguration(classes = {WebConfig.class, RootConfig.class, SecurityConfig.class})
 public class StudentRepoTest {
 
     Logger logger = Logger.getLogger(getClass().toString());
@@ -34,7 +36,7 @@ public class StudentRepoTest {
 
     @Test
     public void findByIdPositive() {
-        Optional<Student> op = studentRepo.findById(1L);
+        Optional<Student> op = studentRepo.findById(14L);
 
         op.ifPresentOrElse(
                 p -> assertEquals(p.getFirstName(), "Dylan"),
