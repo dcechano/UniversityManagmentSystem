@@ -4,7 +4,6 @@ import com.example.ums.entities.Course;
 import com.example.ums.entities.Department;
 import com.example.ums.entities.person.Person;
 import com.example.ums.enums.EmploymentStatus;
-import jdk.jfr.Name;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,6 +14,7 @@ import java.util.List;
     attributeNodes = {@NamedAttributeNode(value = "courses")})
 @Entity
 @Table(name = "FACULTYMEMBER")
+@PrimaryKeyJoinColumn(name = "ID")
 public class FacultyMember extends Person {
 
     @OneToMany(mappedBy = "instructor")

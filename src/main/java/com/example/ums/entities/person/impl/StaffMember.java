@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "STAFFMEMBER")
+@PrimaryKeyJoinColumn(name = "ID")
 public class StaffMember extends Person {
 
     @Column(name = "HIRING_DATE")

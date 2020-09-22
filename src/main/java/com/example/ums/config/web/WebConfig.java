@@ -42,7 +42,6 @@ public class WebConfig implements WebMvcConfigurer, ServletContextAware {
         resolver.setCharacterEncoding("UTF-8");
         resolver.setCacheable(false);
         return resolver;
-
     }
 
     @Bean

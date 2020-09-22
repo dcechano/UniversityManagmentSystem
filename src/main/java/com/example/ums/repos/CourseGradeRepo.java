@@ -1,6 +1,5 @@
 package com.example.ums.repos;
 
-import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 
 import java.util.List;

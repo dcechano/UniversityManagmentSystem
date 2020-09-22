@@ -13,17 +13,14 @@
 </head>
 <body>
 
-<div class="container my-5 mx-auto">
-    <div th:each="course : ${courses}">
-        <p class="h5" th:text="${course.getName()}"></p>
+    <div th:include="landing.html :: header"></div>
 
-        <div th:each="student : ${course.getStudents()}">
-            <p th:text="${student.getLastName()}"></p>
-        </div>
-        <div>
-            <a th:href="@{grades(course_id=${course.getId()})}">Grades</a>
+    <div class="container my-5 mx-auto">
+        <p class="h5 mb-3">Current Courses</p>
+        <div th:each="course : ${courses}">
+            <a class="h5" th:text="${course.getName()}" href="#" th:href="@{grades(course_id=${course.getId()})}"></a>
         </div>
     </div>
-</div>
+
 </body>
 </html>

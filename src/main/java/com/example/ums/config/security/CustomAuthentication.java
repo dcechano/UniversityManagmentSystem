@@ -1,14 +1,11 @@
 package com.example.ums.config.security;
 
-import com.example.ums.entities.Role;
 import com.example.ums.entities.person.Person;
-import com.example.ums.enums.RoleEnum;
 import com.example.ums.repos.PersonRepo;
-import com.example.ums.repos.StudentRepo;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +24,11 @@ public class CustomAuthentication implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
+        Logger logger = Logger.getLogger(getClass().toString());
+        org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(getClass());
+        logger.info("Inside the onAuthenticationSuccess method!");
+        BasicConfigurator.configure();
+        log.warn("Inside the onAuthenticationSuccess method!");
         String username = authentication.getName();
 
         Person person = personRepo.findByUsername(username);
@@ -34,6 +36,7 @@ public class CustomAuthentication implements AuthenticationSuccessHandler {
         HttpSession session = httpServletRequest.getSession();
 
         session.setAttribute("user", person);
+        logger.info("Stored user in the session. Redirecting ... ");
 
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/");
 

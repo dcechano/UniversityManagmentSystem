@@ -1,5 +1,7 @@
 package com.example.ums.config;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.FileAppender;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,10 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.example.ums"})
 public class RootConfig {
+
+    public RootConfig() {
+        BasicConfigurator.configure();
+    }
 
     @Bean
     public DataSource dataSource() {

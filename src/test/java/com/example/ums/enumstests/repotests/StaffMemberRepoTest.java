@@ -1,6 +1,7 @@
 package com.example.ums.enumstests.repotests;
 
 import com.example.ums.entities.person.impl.StaffMember;
+import com.example.ums.enumstests.testconfig.TestConfig;
 import com.example.ums.repos.StaffMemberRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.example.ums.enumstests.testconfig.TestConfig;
 
 import javax.transaction.Transactional;
 import java.util.List;
