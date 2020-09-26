@@ -4,6 +4,7 @@ import com.example.ums.entities.AbstractEntity;
 import com.example.ums.entities.Role;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @NamedEntityGraph(name = "person-roles", attributeNodes = {@NamedAttributeNode(value = "roles")})
@@ -30,9 +31,8 @@ public class Person extends AbstractEntity {
         inverseJoinColumns = @JoinColumn(name = "ROLE")
     )
     @Enumerated(EnumType.STRING)
-    protected List<Role> roles;
+    protected Collection<Role> roles;
 
-//    TODO consider how to fix this constructor to facilitate construction of a new Person via Service
     public Person() {
     }
 
@@ -68,7 +68,7 @@ public class Person extends AbstractEntity {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 

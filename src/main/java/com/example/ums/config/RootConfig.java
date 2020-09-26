@@ -1,12 +1,11 @@
 package com.example.ums.config;
 
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.FileAppender;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,12 +15,40 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
+import java.util.logging.Logger;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.example.ums"})
+@PropertySource({"classpath:datasource-config.properties"})
 public class RootConfig {
+
+    @Value("${driver}")
+    private String driver;
+    @Value("${url}")
+    private String url;
+    @Value("${user}")
+    private String user;
+    @Value("${password}")
+    private String password;
+    @Value("${connection.pool.initialPoolSize}")
+    private int initPoolSize;
+    @Value("${connection.pool.maxPoolSize}")
+    private int maxSize;
+    @Value("${connection.pool.minPoolSize}")
+    private int minSize;
+    @Value("${connection.pool.maxIdleTime}")
+    private int idleTime;
+    @Value("${hibernate.dialect}")
+    private String dialect;
+    @Value("${hibernate.show_sql}")
+    private boolean showSql;
+    @Value("${hibernate.packagesToScan}")
+    private String scan;
 
     public RootConfig() {
         BasicConfigurator.configure();
@@ -29,19 +56,35 @@ public class RootConfig {
 
     @Bean
     public DataSource dataSource() {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        return builder
-                .setType(EmbeddedDatabaseType.H2)
-                .generateUniqueName(true)
-                .addScript("classpath:create_dbs.sql")
-                .addScript("classpath:init_roles.sql")
-                .addScript("classpath:init_departments.sql")
-                .addScript("classpath:init_faculty_staff.sql")
-                .addScript("classpath:init_programs.sql")
-                .addScript("classpath:init_students.sql")
-                .addScript("classpath:init_courses.sql")
-                .addScript("classpath:init_course_grades.sql")
-                .build();
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        try {
+            dataSource.setDriverClass(driver);
+        } catch (PropertyVetoException e) {
+            Logger logger = Logger.getLogger(getClass().toString());
+            logger.warning("PropertyVetoException throw assigning the database driver");
+            e.printStackTrace();
+        }
+        dataSource.setJdbcUrl(url);
+        dataSource.setUser(user);
+        dataSource.setPassword(password);
+        dataSource.setInitialPoolSize(initPoolSize);
+        dataSource.setMinPoolSize(minSize);
+        dataSource.setMaxPoolSize(maxSize);
+        dataSource.setMaxIdleTime(idleTime);
+        return dataSource;
+        //        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+//        return builder
+//                .setType(EmbeddedDatabaseType.H2)
+//                .generateUniqueName(true)
+//                .addScript("classpath:create_dbs.sql")
+//                .addScript("classpath:init_roles.sql")
+//                .addScript("classpath:init_departments.sql")
+//                .addScript("classpath:init_faculty_staff.sql")
+//                .addScript("classpath:init_programs.sql")
+//                .addScript("classpath:init_students.sql")
+//                .addScript("classpath:init_courses.sql")
+//                .addScript("classpath:init_course_grades.sql")
+//                .build();
     }
 
     @Bean
@@ -57,9 +100,9 @@ public class RootConfig {
     @Bean
     public Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.dialect", dialect);
         properties.put("hibernate.format_sql", true);
-        properties.put("hibernate.show_sql", false);
+        properties.put("hibernate.show_sql", showSql);
         properties.put("hibernate.max_fetch_depth", 3);
         properties.put("hibernate.jdbc.batch_size", 10);
         properties.put("hibernate.jdbc.fetch_size", 50);
@@ -70,7 +113,7 @@ public class RootConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("com.example.ums.entities");
+        factoryBean.setPackagesToScan(scan);
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(hibernateProperties());
