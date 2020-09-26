@@ -58,6 +58,17 @@ public class AdminController {
         logger.info("Attempting to save @ModelAttribute('student') with first name: "
                 + student.getFirstName() + " and last name " + student.getLastName());
         personService.save(student);
+        logger.info("Saved the new Student. Now going to retrieve student for debugging");
+        Person person = personRepo.findByUsername("Smiller");
+        logger.info("Person was successfully retrieved. Printing the roles");
+        logger.info(((Role) person.getRoles().toArray()[0]).getRole().name());
+        logger.info("Roles printed. Now going to get Userdetails for debugging");
+        UserDetails user = personService.loadUserByUsername("Smiller");
+        logger.info("UserDetails retrieved. Displaying details");
+        logger.info("Username: " + user.getUsername());
+        logger.info("Password: " + user.getPassword());
+        logger.info("password = password? - " + passwordEncoder.matches("password", user.getPassword()));
+        logger.info("Authorities: " + user.getAuthorities());
         logger.info("Finished saving student. Redirecting to /login");
         return "redirect:/login";
     }

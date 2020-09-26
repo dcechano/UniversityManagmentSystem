@@ -7,6 +7,7 @@ import com.example.ums.repos.RoleRepo;
 import com.example.ums.service.PersonService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,11 +33,11 @@ public class PersonServiceImpl implements PersonService {
 
     private RoleRepo roleRepo;
 
-    private DaoAuthenticationProvider authenticationProvider;
-
-
+    @Autowired
+    private ApplicationContext securityContext;
 
     @Override
+
     public Person findByUsername(String username) {
         return personRepo.findByUsername(username);
     }
@@ -54,11 +55,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //        if (username.equals("Smiller")) {
-        //            logger.info("Implimenting hack!");
-        //            return new User(username, passwordEncoder.encode("password"), List.of(new SimpleGrantedAuthority(RoleEnum.ROLE_STUDENT.name())));
-        //        }
-
         Person person = this.findByUsername(username);
         if (person == null) {
             throw new UsernameNotFoundException("Person with username: " + username + " could not be found!");
@@ -67,11 +63,13 @@ public class PersonServiceImpl implements PersonService {
                 role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList());
 
         User user = new User(person.getUsername(), person.getPassword(), grantedAuthorityRoles);
+        DaoAuthenticationProvider authenticationProvider = securityContext.getBean(DaoAuthenticationProvider.class);
         if (authenticationProvider == null) {
-            throw new RuntimeException("DaoAuthenticationProvider was null!");
+            throw new RuntimeException("DAOAuthenticationProvider was null!");
         } else {
             authenticationProvider.getUserCache().putUserInCache(user);
         }
+
         return user;
     }
 
@@ -90,7 +88,4 @@ public class PersonServiceImpl implements PersonService {
         this.personRepo = personRepo;
     }
 
-    public void setAuthenticationProvider(DaoAuthenticationProvider provider) {
-        this.authenticationProvider = provider;
-    }
 }
