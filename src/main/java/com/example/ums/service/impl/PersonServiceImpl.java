@@ -8,7 +8,6 @@ import com.example.ums.service.PersonService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -62,15 +61,7 @@ public class PersonServiceImpl implements PersonService {
         Collection<GrantedAuthority> grantedAuthorityRoles = person.getRoles().stream().map(
                 role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList());
 
-        User user = new User(person.getUsername(), person.getPassword(), grantedAuthorityRoles);
-        DaoAuthenticationProvider authenticationProvider = securityContext.getBean(DaoAuthenticationProvider.class);
-        if (authenticationProvider == null) {
-            throw new RuntimeException("DAOAuthenticationProvider was null!");
-        } else {
-            authenticationProvider.getUserCache().putUserInCache(user);
-        }
-
-        return user;
+        return new User(person.getUsername(), person.getPassword(), grantedAuthorityRoles);
     }
 
     @Autowired

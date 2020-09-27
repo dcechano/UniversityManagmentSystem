@@ -59,13 +59,12 @@
                     <li class="nav-item" sec:authorize="hasRole('ROLE_FACULTY_MEMBER')">
                         <a th:href="@{'/faculty_portal/' + ${session.user.getId()} + '/'}" class="nav-link">Faculty Portal</a>
                     </li>
+                    <li class="my-2 my-lg-0" sec:authorize="${!isAuthenticated()}">
+                        <a class="nav-link" href="#" th:href="@{login}">Log In</a>
+                    </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" method="post" th:href="@{/logout}">
+                <form class="form-inline my-2 my-lg-0" method="post" th:href="@{/logout}" sec:authorize="isAuthenticated()">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-                </form>
-                <!-- TODO find a way  so that logout and login are not show when there is no signed in user ect.-->
-                <form class="form-inline my-2 my-lg-0" method="get" th:href="@{/login}">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
                 </form>
             </div>
         </nav>

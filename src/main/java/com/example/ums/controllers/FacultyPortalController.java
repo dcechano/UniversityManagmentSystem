@@ -38,31 +38,26 @@ public class FacultyPortalController {
                 () -> {
                     throw new EntityNotFoundException("Faculty member with id: " + id + " could not be found");
                 });
-        return "faculty_portal";
+        return "faculty_portal/faculty_portal";
     }
 
     @GetMapping("/courses")
     public String facultyCourses(Model model, @ModelAttribute("faculty") FacultyMember member) {
         model.addAttribute("courses", member.getCourses());
-        return "courses";
+        return "faculty_portal/courses";
     }
 
+//    TODO fix the logic in this controller. Make sure there is no redundant objects in Model
     @GetMapping("/grades")
     public String gradeStudents(Model model, @RequestParam("course_id") Long courseId) {
         List<CourseGrade> courseGrades = courseRepo.getCourseGradesByCourseId(courseId);
-        if (courseGrades == null || courseGrades.size() == 0) {
-            throw new RuntimeException("course grades didnt fetch");
-        }
         courseGrades = courseGrades.stream()
                 .sorted(Comparator.comparing(o -> o.getStudent().getLastName()))
                 .collect(Collectors.toList());
-
-
-
         model.addAttribute("courseGrades", courseGrades);
         model.addAttribute("form", new CourseGradeDTO(courseGrades));
         model.addAttribute("newStudent", new Student());
-        return "grades";
+        return "faculty_portal/grades";
     }
 
     @PostMapping("/process_data")
@@ -70,7 +65,7 @@ public class FacultyPortalController {
         List<CourseGrade> courseGrades = courseGradeDTO.getCourseGrades();
         courseGradeRepo.merge(courseGrades);
 
-        return "redirect:courses";
+        return "faculty_portal/courses";
     }
 
     @Autowired

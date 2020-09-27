@@ -3,25 +3,18 @@ package com.example.ums.controllers;
 import com.example.ums.entities.Role;
 import com.example.ums.entities.person.Person;
 import com.example.ums.entities.person.impl.Student;
-import com.example.ums.enums.RoleEnum;
-import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.PersonRepo;
 import com.example.ums.repos.RoleRepo;
 import com.example.ums.repos.StudentRepo;
 import com.example.ums.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.logging.Logger;
 
 @RequestMapping("/admin/")
@@ -41,16 +34,19 @@ public class AdminController {
 
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private DaoAuthenticationProvider provider;
+
 
     @RequestMapping
     public String admin() {
-        return "redirect:register_student";
+        return "admin_portal/admin_page";
     }
 
     @GetMapping("/register_student")
     public String registerStudent(Model model) {
         model.addAttribute("student", new Student());
-        return "register_student";
+        return "admin_portal/register_student";
     }
 
     @PostMapping("/save_student")
@@ -77,7 +73,13 @@ public class AdminController {
     public String listStudents(Model model) {
         model.addAttribute("students", studentRepo.findAll());
         model.addAttribute("people", personRepo.findAll());
-        return "all_students";
+        return "admin_portal/all_students";
+    }
+
+    @RequestMapping("/remove_student")
+    public String removeStudent(@RequestParam("student_id") Long studentId) {
+        personRepo.deleteById(studentId);
+        return "redirect:list_students";
     }
 
     @Autowired

@@ -34,7 +34,7 @@ public class Student extends Person {
     @JoinColumn(name = "MAJOR")
     private Program major;
 
-    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<CourseGrade> courseGrades;
 
     @Column(name = "STATUS")
