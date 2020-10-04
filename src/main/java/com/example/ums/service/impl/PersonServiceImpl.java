@@ -46,9 +46,7 @@ public class PersonServiceImpl implements PersonService {
     public void save(Person person) {
         logger.info("Inside the PersonService save method!");
         person.setUsername(person.getFirstName().charAt(0) + person.getLastName().toLowerCase());
-        person.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_STUDENT.name())));
         person.setPassword(passwordEncoder.encode(person.getPassword()));
-        person.setVersion(1);
         personRepo.save(person);
     }
 

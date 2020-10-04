@@ -41,8 +41,13 @@ public class Student extends Person {
     @Enumerated(EnumType.STRING)
     private AcademicStatus status;
 
-//    TODO fix these to constructors to facilitate a creation via a StudentService
     public Student() {
+    }
+
+    @PreUpdate
+    @PrePersist
+    private void update() {
+        modifiedAt = LocalDateTime.now();
     }
 
     public List<CourseGrade> getCourseGrades() {
@@ -76,4 +81,6 @@ public class Student extends Person {
     public void setEnrollmentDate(LocalDateTime enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
+
+
 }

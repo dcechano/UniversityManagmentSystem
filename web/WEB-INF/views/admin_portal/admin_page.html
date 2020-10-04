@@ -11,7 +11,6 @@
     <title>University Administrator</title>
 </head>
 <body>
-<h2>Administrator page</h2>
 <!--    TODO modify this nav bar for an administrator's needs-->
 <div class="alert-success" id="univ-name">
     <div>
@@ -31,11 +30,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="#" th:href="@{list_students}">Manage Database</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" th:href="@{register_student}" href="#" tabindex="-1">Register New Person</a>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{register_student}" href="#" tabindex="-1">Register New Student</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{register_faculty}" href="#" tabindex="-1">Register New Faculty</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" method="post" th:href="@{/logout}" sec:authorize="isAuthenticated()">

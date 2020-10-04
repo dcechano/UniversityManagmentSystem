@@ -7,6 +7,7 @@ import com.example.ums.enums.EmploymentStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class FacultyMember extends Person {
     @OneToMany(mappedBy = "instructor")
     private List<Course> courses;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "DEPARTMENT")
     private Department department;
 
@@ -29,8 +31,8 @@ public class FacultyMember extends Person {
     private EmploymentStatus status;
 
     @Column(name = "HIRING_DATE")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime hiringDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate hiringDate;
 
     public FacultyMember() {
 
@@ -52,6 +54,10 @@ public class FacultyMember extends Person {
         this.department = department;
     }
 
+    public void setHiringDate(LocalDate hiringDate) {
+        this.hiringDate = hiringDate;
+    }
+
     public EmploymentStatus getStatus() {
         return status;
     }
@@ -60,7 +66,18 @@ public class FacultyMember extends Person {
         this.status = status;
     }
 
-    public LocalDateTime getHiringDate() {
+    public LocalDate getHiringDate() {
         return hiringDate;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FacultyMember{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

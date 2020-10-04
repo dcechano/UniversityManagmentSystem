@@ -1,11 +1,13 @@
 package com.example.ums.controllers;
 
+import com.example.ums.dto.FacultyDTO;
+import com.example.ums.entities.Department;
 import com.example.ums.entities.Role;
 import com.example.ums.entities.person.Person;
+import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.entities.person.impl.Student;
-import com.example.ums.repos.PersonRepo;
-import com.example.ums.repos.RoleRepo;
-import com.example.ums.repos.StudentRepo;
+import com.example.ums.enums.RoleEnum;
+import com.example.ums.repos.*;
 import com.example.ums.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,27 +17,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @RequestMapping("/admin/")
 @Controller
 public class AdminController {
 
-    private Logger logger = Logger.getLogger(getClass().toString());
+    private final Logger logger = Logger.getLogger(getClass().toString());
 
     private StudentRepo studentRepo;
     //    TODO potentially remove this repo if unnecessary
     @Autowired
     private PersonRepo personRepo;
     @Autowired
+    private FacultyMemberRepo facultyMemberRepo;
+    @Autowired
     private PersonService personService;
+
     @Autowired
     private RoleRepo roleRepo;
 
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
-    private DaoAuthenticationProvider provider;
+    private DepartmentRepo departmentRepo;
 
 
     @RequestMapping
@@ -51,22 +56,37 @@ public class AdminController {
 
     @PostMapping("/save_student")
     public String saveStudent(@ModelAttribute("student") Student student) {
-        logger.info("Attempting to save @ModelAttribute('student') with first name: "
-                + student.getFirstName() + " and last name " + student.getLastName());
+        student.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_STUDENT.name())));
         personService.save(student);
-        logger.info("Saved the new Student. Now going to retrieve student for debugging");
-        Person person = personRepo.findByUsername("Smiller");
-        logger.info("Person was successfully retrieved. Printing the roles");
-        logger.info(((Role) person.getRoles().toArray()[0]).getRole().name());
-        logger.info("Roles printed. Now going to get Userdetails for debugging");
-        UserDetails user = personService.loadUserByUsername("Smiller");
-        logger.info("UserDetails retrieved. Displaying details");
-        logger.info("Username: " + user.getUsername());
-        logger.info("Password: " + user.getPassword());
-        logger.info("password = password? - " + passwordEncoder.matches("password", user.getPassword()));
-        logger.info("Authorities: " + user.getAuthorities());
-        logger.info("Finished saving student. Redirecting to /login");
-        return "redirect:/login";
+        return "redirect:/admin/";
+    }
+
+    @GetMapping("/register_faculty")
+    public String registerFaculty(Model model) {
+        List<Department> departments = departmentRepo.findAll();
+        FacultyDTO dto = new FacultyDTO();
+        dto.setDepartments(departments);
+        model.addAttribute("faculty", dto);
+        return "admin_portal/register_faculty";
+    }
+
+    @PostMapping("/save_faculty")
+    public String saveFaculty(@ModelAttribute("faculty") FacultyDTO facultyDTO) {
+        FacultyMember facultyMember = facultyDTO.getFacultyMember();
+        facultyMember.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_FACULTY_MEMBER.name())));
+//        personService.save(facultyMember);
+        Logger logger = Logger.getLogger(getClass().toString());
+        logger.info("First name: " + facultyMember.getFirstName());
+        logger.info("Last name: " + facultyMember.getLastName());
+        facultyMemberRepo.save(facultyMember);
+
+        return "redirect:/admin/";
+    }
+
+    @RequestMapping("/remove_faculty")
+    public String removeFaculty(@RequestParam("id") Long facultyId) {
+        personRepo.deleteById(facultyId);
+        return "redirect:list_students";
     }
 
     @GetMapping("/list_students")
@@ -87,8 +107,4 @@ public class AdminController {
         this.studentRepo = studentRepo;
     }
 
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 }

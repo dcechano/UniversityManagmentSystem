@@ -12,7 +12,6 @@
     <title>Landing</title>
 </head>
 <body>
-
     <div th:fragment="header">
         <div class="alert-success" id="univ-name">
             <div>
@@ -24,7 +23,7 @@
 
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" id="nav-logo" href="#">ASU</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +34,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tour</a>
+                        <a class="nav-link" href="#" th:href="@{schedule_tour}">Visit</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Apply</a>
@@ -59,13 +58,13 @@
                     <li class="nav-item" sec:authorize="hasRole('ROLE_FACULTY_MEMBER')">
                         <a th:href="@{'/faculty_portal/' + ${session.user.getId()} + '/'}" class="nav-link">Faculty Portal</a>
                     </li>
-                    <li class="my-2 my-lg-0" sec:authorize="${!isAuthenticated()}">
+                    <li class="nav-item" sec:authorize="${!isAuthenticated()}">
                         <a class="nav-link" href="#" th:href="@{login}">Log In</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{logout}">Logout</a>
+                    </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" method="post" th:href="@{/logout}" sec:authorize="isAuthenticated()">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-                </form>
             </div>
         </nav>
     </div>

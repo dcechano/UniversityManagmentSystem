@@ -3,7 +3,7 @@ package com.example.ums.controllers;
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.Department;
-import com.example.ums.entities.ScheduleDTO;
+import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseRepo;
@@ -43,7 +43,6 @@ public class StudentPortalController {
     @GetMapping("/schedule")
     public String studentSchedule(Model model, @PathVariable("id") Long id ,@ModelAttribute("student") Student student){
         List<ScheduleDTO> schedule = courseRepo.findScheduleByStudentId(student.getId());
-//        List<CourseGrade> courses = courseRepo.getCourseGradesByCourseId(id);
         model.addAttribute("schedule", schedule);
         return "student_portal/student_schedule";
     }

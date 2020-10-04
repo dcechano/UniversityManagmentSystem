@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/styles.css}">
+    <title>Register a new Faculty Member</title>
+</head>
+<body>
+<div class="container mx-auto my-5">
+    <form action="" th:action="@{save_faculty}" th:object="${faculty}" method="post">
+        <div class="card border-info">
+            <h3 class="h3 text-center card-header badge-info">Register New Faculty Member</h3>
+
+            <div class="my-3">
+                <div class="form-group col-5 m-auto">
+                    <label for="first_name">First Name</label>
+                    <input class="form-control" id="first_name" th:field="*{firstName}">
+                </div>
+                <div class="form-group col-5 m-auto">
+                    <label for="last_name">Last Name</label>
+                    <input class="form-control" id="last_name" th:field="*{lastName}">
+                </div>
+                <div class="form-group col-5 m-auto">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password" th:field="*{password}">
+                </div>
+                <div class="form-group col-5 m-auto">
+                    <label for="hiring_date">Hiring Date</label>
+                    <input id="hiring_date" th:field="*{hiringDate}" type="date">
+                </div>
+                <div class="form-group col-5 m-auto">
+                    <label for="dep_select" th:text="Department"></label>
+                    <select id="dep_select" class="custom-select-lg" th:field="*{depName}">
+                        <option th:each="dep : *{departments}" th:value="${dep.name}" th:text="${dep.name}"></option>
+                    </select>
+
+                    <div th:each="dep, itemStat : *{departments}">
+                        <input th:hidden="true" th:field="*{departments[__${itemStat.index}__].id}">
+                        <input th:hidden="true" th:field="*{departments[__${itemStat.index}__].name}">
+                        <input th:hidden="true" th:field="*{departments[__${itemStat.index}__].version}">
+                    </div>
+
+                    <input class="btn btn-primary form-control mt-3" type="submit" value="Register">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

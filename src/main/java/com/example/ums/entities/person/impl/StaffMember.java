@@ -26,6 +26,12 @@ public class StaffMember extends Person {
     public StaffMember() {
     }
 
+    @PreUpdate
+    @PrePersist
+    private void update() {
+        modifiedAt = LocalDateTime.now();
+    }
+
     public LocalDateTime getHiringDate() {
         return hiringDate;
     }

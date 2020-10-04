@@ -81,8 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(customAuthentication)
                 .permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Bean
