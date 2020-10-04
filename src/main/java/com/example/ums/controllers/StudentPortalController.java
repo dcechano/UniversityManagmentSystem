@@ -3,7 +3,7 @@ package com.example.ums.controllers;
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.Department;
-import com.example.ums.entities.ScheduleDTO;
+import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseRepo;
@@ -37,15 +37,14 @@ public class StudentPortalController {
                 () -> {
                     throw new EntityNotFoundException("Student with Id: " + id + " could not be found");
                 });
-        return "student_portal";
+        return "student_portal/student_portal";
     }
 
     @GetMapping("/schedule")
     public String studentSchedule(Model model, @PathVariable("id") Long id ,@ModelAttribute("student") Student student){
         List<ScheduleDTO> schedule = courseRepo.findScheduleByStudentId(student.getId());
-//        List<CourseGrade> courses = courseRepo.getCourseGradesByCourseId(id);
         model.addAttribute("schedule", schedule);
-        return "student_schedule";
+        return "student_portal/student_schedule";
     }
 
     @GetMapping("/manage")
@@ -53,7 +52,7 @@ public class StudentPortalController {
         var departments = departmentRepo.findAll();
 
         model.addAttribute("departments", departments);
-        return "manage";
+        return "student_portal/manage";
     }
 
     @GetMapping("/show_courses")
@@ -65,7 +64,7 @@ public class StudentPortalController {
         }
         model.addAttribute("department", department.get());
 
-        return "show_courses";
+        return "student_portal/show_courses";
     }
 
     @GetMapping("/add_course")
@@ -81,7 +80,7 @@ public class StudentPortalController {
                     () -> {
                         throw new EntityNotFoundException("Course with Id: " + courseId + " could not be found");});
 
-        return "redirect:manage";
+        return "student_portal/manage";
     }
 
 

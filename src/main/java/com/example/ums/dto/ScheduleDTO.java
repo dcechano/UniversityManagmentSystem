@@ -1,4 +1,4 @@
-package com.example.ums.entities;
+package com.example.ums.dto;
 
 public class ScheduleDTO {
     private String course;

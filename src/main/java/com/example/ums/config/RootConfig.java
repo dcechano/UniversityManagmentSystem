@@ -1,5 +1,6 @@
 package com.example.ums.config;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.log4j.BasicConfigurator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +19,6 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 import java.util.logging.Logger;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement
@@ -48,7 +47,7 @@ public class RootConfig {
     @Value("${hibernate.show_sql}")
     private boolean showSql;
     @Value("${hibernate.packagesToScan}")
-    private String scan;
+    private String packagesToScan;
 
     public RootConfig() {
         BasicConfigurator.configure();
@@ -72,19 +71,6 @@ public class RootConfig {
         dataSource.setMaxPoolSize(maxSize);
         dataSource.setMaxIdleTime(idleTime);
         return dataSource;
-        //        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-//        return builder
-//                .setType(EmbeddedDatabaseType.H2)
-//                .generateUniqueName(true)
-//                .addScript("classpath:create_dbs.sql")
-//                .addScript("classpath:init_roles.sql")
-//                .addScript("classpath:init_departments.sql")
-//                .addScript("classpath:init_faculty_staff.sql")
-//                .addScript("classpath:init_programs.sql")
-//                .addScript("classpath:init_students.sql")
-//                .addScript("classpath:init_courses.sql")
-//                .addScript("classpath:init_course_grades.sql")
-//                .build();
     }
 
     @Bean
@@ -113,7 +99,7 @@ public class RootConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan(scan);
+        factoryBean.setPackagesToScan(packagesToScan);
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(hibernateProperties());

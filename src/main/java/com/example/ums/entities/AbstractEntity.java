@@ -19,13 +19,10 @@ public abstract class AbstractEntity implements Serializable {
     protected int version;
 
     @Column(name = "MODIFIED_AT")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     protected LocalDateTime modifiedAt;
 
-
-
     public AbstractEntity() {
-        modifiedAt = LocalDateTime.now();
     }
 
     public Long getId() {

@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().csrfTokenRepository(repo());
 //    }
 
+//   TODO Fix the logout functionality
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -80,10 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(customAuthentication)
                 .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .permitAll();
-
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Bean
