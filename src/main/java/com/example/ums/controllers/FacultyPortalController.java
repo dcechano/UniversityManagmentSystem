@@ -47,7 +47,6 @@ public class FacultyPortalController {
         return "faculty_portal/courses";
     }
 
-//    TODO fix the logic in this controller. Make sure there is no redundant objects in Model
     @GetMapping("/grades")
     public String gradeStudents(Model model, @RequestParam("course_id") Long courseId) {
         List<CourseGrade> courseGrades = courseRepo.getCourseGradesByCourseId(courseId);
@@ -56,7 +55,6 @@ public class FacultyPortalController {
                 .collect(Collectors.toList());
         model.addAttribute("courseGrades", courseGrades);
         model.addAttribute("form", new CourseGradeDTO(courseGrades));
-        model.addAttribute("newStudent", new Student());
         return "faculty_portal/grades";
     }
 

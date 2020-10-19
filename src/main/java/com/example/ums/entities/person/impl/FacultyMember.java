@@ -38,6 +38,12 @@ public class FacultyMember extends Person {
 
     }
 
+    @PrePersist
+    @PreUpdate
+    public void update() {
+        modifiedAt = LocalDateTime.now();
+    }
+
     public List<Course> getCourses() {
         return courses;
     }
