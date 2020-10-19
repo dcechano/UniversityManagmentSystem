@@ -39,7 +39,6 @@ public class CourseRepoImpl extends AbstractRepoImpl<Course> implements CourseRe
         return (List<CourseGrade>) query.getResultList();
     }
 
-//    TODO clean up this method
     @SuppressWarnings("unchecked")
     @Override
     public List<ScheduleDTO> findScheduleByStudentId(Long studentId) {

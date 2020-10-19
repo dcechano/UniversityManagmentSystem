@@ -30,11 +30,11 @@ public class Student extends Person {
     @Column(name = "ENROLLMENT_DATE")
     private LocalDateTime enrollmentDate;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "MAJOR")
     private Program major;
 
-    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "student")
     private List<CourseGrade> courseGrades;
 
     @Column(name = "STATUS")

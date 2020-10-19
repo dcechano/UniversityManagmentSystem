@@ -13,8 +13,8 @@
 <body>
 <div class="container mx-auto my-5">
     <form action="#" th:action="${schedule_tour}" th:object="${tourDTO}" method="post">
-        <div class="card border-info">
-            <h3 class="h3 text-center card-header badge-info">Schedule a Campus Visit</h3>
+        <div id="form-box" class="card">
+            <h3 class="h3 text-center card-header green">Schedule a Campus Visit</h3>
             <div class="my-3">
                 <div class="form-group col-5 m-auto">
                     <label for="first_name">First Name</label>
@@ -27,7 +27,7 @@
                 <div class="form-group col-5 m-auto">
                     <label for="date">Date of tour</label>
                     <input class="form-control" type="datetime-local" id="date" th:field="*{scheduledFor}">
-                    <input class="btn btn-primary form-control mt-3" type="submit" value="Schedule Tour">
+                    <input class="btn green form-control mt-3" type="submit" value="Schedule Tour">
                 </div>
             </div>
         </div>

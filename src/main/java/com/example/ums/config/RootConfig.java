@@ -50,7 +50,7 @@ public class RootConfig {
     private String packagesToScan;
 
     public RootConfig() {
-        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
     }
 
     @Bean
