@@ -7,10 +7,45 @@
     --parisienne: 'Parisienne', sans-serif;
 }
 
-#form-box {
-    width: 66.6667%;
-    margin: 25px auto;
+* {
+  margin: 0;
+}
 
+html, body{
+    height: 100%;
+}
+
+
+main {
+    min-height: 100%;
+    padding-bottom: 100px;
+    margin-bottom: -100px;
+}
+
+/*.wrapper:after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*}*/
+
+/*footer, .wrapper:after{*/
+/*    height: 100px;*/
+/*}*/
+
+/*    !*padding-bottom: 100px;*!*/
+/*html, body {*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    !*background-color: red;*!*/
+/*}*/
+/*body{*/
+
+/*}*/
+
+#form-box {
+    width: 75%;
+    margin: 25px auto;
 }
 
 .green {
@@ -44,6 +79,17 @@
     background-color: var(--mainColor);
 }
 
+#banner-light{
+    font-family: 'SansSerif', Arial, serif;
+    font-size: 20px;
+    text-align: center;
+    text-decoration-width: 100px;
+    color: var(--mainColor);
+    margin-top: 10px;
+}
+
+
+
 .cursive {
     font-family: var(--parisienne), cursive;
     font-size: 45px;
@@ -53,8 +99,42 @@
     font-family: var(--parisienne), cursive;
 }
 
-li .nav-item {
+.nav{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #f8f9fa;
+    color: black;
+    height: fit-content;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0 auto;
+}
+
+.login-links {
+    list-style: none;
     margin: 0;
+}
+
+.nav-link{
+    color: black;
+}
+
+
+li.nav-item {
+    margin: 0;
+    list-style: none;
 }
 
 div .card {
@@ -71,7 +151,7 @@ div .card {
 
 }
 
-a, a:visited{
+.link, .link:visited{
     color: var(--linkColor);
 }
 
@@ -127,13 +207,17 @@ h2{
 
 footer {
     background: var(--mainColor);
+    position: relative;
     color: white;
     font-family: var(--roboto);
-    height: auto;
-    padding: 1rem;
+    height: 100px;
+    width: 100%;
+    /*padding: 1rem;*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /*margin-bottom: -100px;*/
+    clear: both;
 }
 
 .footer-tags{
@@ -144,3 +228,24 @@ footer {
     border: none;
 }
 
+.delete_btn {
+    padding: 1px;
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    height: auto;
+    width: auto;
+}
+
+#db_table {
+    margin: auto;
+
+}
+
+#db_table td {
+    margin: 3px;
+}
+
+#db_table a {
+    color: #dc3545;
+}

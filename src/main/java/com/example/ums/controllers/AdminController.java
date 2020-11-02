@@ -4,11 +4,14 @@ import com.example.ums.dto.FacultyDTO;
 import com.example.ums.entities.Department;
 import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.entities.person.impl.Student;
+import com.example.ums.enums.AcademicStatus;
+import com.example.ums.enums.EmploymentStatus;
 import com.example.ums.enums.RoleEnum;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.*;
 import com.example.ums.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +41,8 @@ public class AdminController {
     @Autowired
     private DepartmentRepo departmentRepo;
 
+    private PasswordEncoder passwordEncoder;
+
 
     @RequestMapping
     public String admin() {
@@ -53,6 +58,7 @@ public class AdminController {
     @PostMapping("/save_student")
     public String saveStudent(@ModelAttribute("student") Student student) {
         student.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_STUDENT.name())));
+        student.setStatus(AcademicStatus.GOOD_STANDING);
         personService.save(student);
         return "redirect:/admin/";
     }
@@ -91,32 +97,10 @@ public class AdminController {
     public String saveFaculty(@ModelAttribute("faculty") FacultyDTO facultyDTO) {
         FacultyMember facultyMember = facultyDTO.getFacultyMember();
         facultyMember.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_FACULTY_MEMBER.name())));
-        //        personService.save(facultyMember);
-        Logger logger = Logger.getLogger(getClass().toString());
-        logger.info("First name: " + facultyMember.getFirstName());
-        logger.info("Last name: " + facultyMember.getLastName());
-        facultyMemberRepo.save(facultyMember);
+        facultyMember.setStatus(EmploymentStatus.PART_TIME);
+        personService.save(facultyMember);
 
         return "redirect:/admin/";
-    }
-
-    @RequestMapping("/remove_faculty")
-    public String removeFaculty(@RequestParam("id") Long facultyId) {
-        personRepo.deleteById(facultyId);
-        return "redirect:list_students";
-    }
-
-    @GetMapping("/list_students")
-    public String listStudents(Model model) {
-        model.addAttribute("students", studentRepo.findAll());
-        model.addAttribute("people", personRepo.findAll());
-        return "admin_portal/all_students";
-    }
-
-    @RequestMapping("/remove_student")
-    public String removeStudent(@RequestParam("student_id") Long studentId) {
-        personRepo.deleteById(studentId);
-        return "redirect:list_students";
     }
 
     @GetMapping("/modify_faculty/{id}")
@@ -146,9 +130,34 @@ public class AdminController {
         return "redirect:/admin/";
     }
 
+
+    @RequestMapping("/remove_faculty")
+    public String removeFaculty(@RequestParam("id") Long facultyId) {
+        personRepo.deleteById(facultyId);
+        return "redirect:manage_db";
+    }
+
+    @GetMapping("/manage_db")
+    public String listStudents(Model model) {
+        model.addAttribute("students", studentRepo.findAll());
+        model.addAttribute("people", personRepo.findAll());
+        return "admin_portal/manage_db";
+    }
+
+    @RequestMapping("/remove_student")
+    public String removeStudent(@RequestParam("student_id") Long studentId) {
+        personRepo.deleteById(studentId);
+        return "redirect:manage_db";
+    }
+
+
     @Autowired
     public void setStudentRepo(StudentRepo studentRepo) {
         this.studentRepo = studentRepo;
     }
 
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 }

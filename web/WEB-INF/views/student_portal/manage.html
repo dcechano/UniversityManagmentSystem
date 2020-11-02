@@ -11,6 +11,7 @@
     <title>Add/Drop Classes</title>
 </head>
 <body>
+<main>
     <div class="container">
         <div class="card my-5">
             <div class="card-header">Select by Department</div>
@@ -24,5 +25,7 @@
         <a href="" th:href="@{schedule}">Show Schedule</a>
         <a href="" th:href="@{'/student_portal/' + ${student.getId()} + '/'}">Back to portal</a>
     </div>
+</main>
+<footer th:replace="landing.html::footer"></footer>
 </body>
 </html>

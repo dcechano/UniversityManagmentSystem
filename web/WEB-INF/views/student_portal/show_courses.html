@@ -13,6 +13,8 @@
     <!--<title th:text="${department.getName()} Department Courses"></title>-->
 </head>
 <body>
+
+<main>
  <div class="container">
         <div class="card my-5">
             <div class="card-header" th:text="${department.getName()}"></div>
@@ -27,5 +29,8 @@
             </div>
         </div>
     </div>
+</main>
+
+<footer th:replace="landing.html::footer"></footer>
 </body>
 </html>

@@ -11,6 +11,9 @@
     <title>Schedule Tour</title>
 </head>
 <body>
+<main>
+
+
 <div class="container mx-auto my-5">
     <form action="#" th:action="${schedule_tour}" th:object="${tourDTO}" method="post">
         <div id="form-box" class="card">
@@ -18,11 +21,11 @@
             <div class="my-3">
                 <div class="form-group col-5 m-auto">
                     <label for="first_name">First Name</label>
-                    <input class="form-control" placeholder="Enter the first name of student" id="first_name" th:field="*{firstName}">
+                    <input class="form-control" placeholder="Student's first name of student" id="first_name" th:field="*{firstName}">
                 </div>
                 <div class="form-group col-5 m-auto">
                     <label for="last_name">Last Name</label>
-                    <input class="form-control" placeholder="Enter the last name of student" id="last_name" th:field="*{lastName}">
+                    <input class="form-control" placeholder="Student's last name of student" id="last_name" th:field="*{lastName}">
                 </div>
                 <div class="form-group col-5 m-auto">
                     <label for="date">Date of tour</label>
@@ -34,6 +37,9 @@
     </form>
 
 </div>
+</main>
+
+<footer th:replace="landing.html::footer"></footer>
 
 </body>
 </html>

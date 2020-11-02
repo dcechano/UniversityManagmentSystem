@@ -50,7 +50,7 @@ public class CourseRepoImpl extends AbstractRepoImpl<Course> implements CourseRe
         List<Object[]> result = (List<Object[]>) query.getResultList();
         List<ScheduleDTO> list = new ArrayList<>();
         for (Object[] obj : result) {
-            Query q = entityManager.createNativeQuery("SELECT F.LAST_NAME FROM FACULTYMEMBER F WHERE F.ID=:id");
+            Query q = entityManager.createNativeQuery("SELECT P.LAST_NAME FROM PERSON P WHERE P.ID=:id");
             q.setParameter("id", obj[3]);
             String name = (String)  q.getSingleResult();
 

@@ -4,31 +4,21 @@ import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.Program;
 import com.example.ums.entities.person.Person;
 import com.example.ums.enums.AcademicStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@NamedEntityGraph(
-        name = "course-grades",
-        attributeNodes = {
-                @NamedAttributeNode(value = "courseGrades", subgraph = "student-course")
-        },
-        subgraphs = {
-                @NamedSubgraph(name = "student-course",
-                attributeNodes = {
-                        @NamedAttributeNode("student"),
-                        @NamedAttributeNode("course")
-                })
-        }
-)
 @Entity
 @Table(name = "STUDENT")
 @PrimaryKeyJoinColumn(name = "ID")
 public class Student extends Person {
 
     @Column(name = "ENROLLMENT_DATE")
-    private LocalDateTime enrollmentDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate enrollmentDate;
 
     @ManyToOne
     @JoinColumn(name = "MAJOR")
@@ -44,8 +34,14 @@ public class Student extends Person {
     public Student() {
     }
 
-    @PreUpdate
     @PrePersist
+    public void persist() {
+        modifiedAt = LocalDateTime.now();
+        enrollmentDate = LocalDate.now();
+        version = 1;
+    }
+
+    @PreUpdate
     private void update() {
         modifiedAt = LocalDateTime.now();
     }
@@ -74,11 +70,11 @@ public class Student extends Person {
         this.status = status;
     }
 
-    public LocalDateTime getEnrollmentDate() {
+    public LocalDate getEnrollmentDate() {
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(LocalDateTime enrollmentDate) {
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
 

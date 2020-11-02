@@ -12,15 +12,16 @@
     <title>Courses</title>
 </head>
 <body>
-
     <div th:include="landing.html :: header"></div>
-
+<main>
     <div class="container my-5 mx-auto">
         <p class="h5 mb-3">Current Courses</p>
         <div th:each="course : ${courses}">
             <a class="h5" th:text="${course.getName()}" href="#" th:href="@{grades(course_id=${course.getId()})}"></a>
         </div>
     </div>
+</main>
 
+<footer th:replace="landing.html::footer"></footer>
 </body>
 </html>

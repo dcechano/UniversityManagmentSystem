@@ -8,9 +8,9 @@
 </head>
 <body>
 <div class="container mx-auto my-5">
-    <form action="" th:action="@{update_faculty}" th:object="${faculty}" method="post">
-        <div class="card border-info">
-            <h3 class="h3 text-center card-header badge-info">Register New Faculty Member</h3>
+    <form action="" th:action="@{/admin/save_faculty}" th:object="${faculty}" method="post">
+        <div id="form-box" class="card">
+            <h3 class="h3 text-center card-header green">Register New Faculty Member</h3>
 
             <div class="my-3">
                 <div class="form-group col-5 m-auto">
@@ -43,7 +43,7 @@
                         <input th:hidden="true" th:field="*{departments[__${itemStat.index}__].version}">
                     </div>
 
-                    <input class="btn btn-primary form-control mt-3" type="submit" value="Register">
+                    <input class="btn green form-control mt-3" type="submit" value="Register">
                 </div>
             </div>
         </div>
