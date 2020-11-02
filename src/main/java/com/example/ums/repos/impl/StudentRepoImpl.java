@@ -7,6 +7,7 @@ import com.example.ums.repos.StudentRepo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityGraph;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.Optional;
@@ -34,8 +35,10 @@ public class StudentRepoImpl extends AbstractRepoImpl<Student> implements Studen
 
     @Override
     public Optional<Student> findStudentWithCourseGrades(Long id) {
-        EntityGraph<?> entityGraph = entityManager.getEntityGraph("course-grades");
-        Student student = entityManager.find(Student.class, id, Map.of("javax.persistence.fetchgraph", entityGraph));
+        TypedQuery<Student> query = entityManager.createQuery(
+                "SELECT s FROM Student  s JOIN FETCH s.courseGrades WHERE s.id =: id", Student.class);
+        query.setParameter("id", id);
+        Student student = query.getSingleResult();
         return Optional.ofNullable(student);
     }
 }

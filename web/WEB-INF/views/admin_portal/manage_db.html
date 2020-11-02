@@ -13,7 +13,7 @@
 </head>
 <body>
     <h2>Persons Table</h2>
-    <table>
+    <table id="db_table">
         <thead>
         <tr>
             <th>ID</th>
@@ -35,5 +35,13 @@
         </tr>
         </tbody>
     </table>
+<script>
+    var btns = document.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+            var ok = confirm("Are you sure you want to delete this person from the database?");
+        });
+    }
+</script>
 </body>
 </html>

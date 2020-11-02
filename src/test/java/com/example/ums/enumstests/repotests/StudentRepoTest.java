@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -55,7 +56,7 @@ public class StudentRepoTest {
     @Test
     public void saveTest() {
         Student student = new Student();
-        student.setEnrollmentDate(LocalDateTime.now());
+        student.setEnrollmentDate(LocalDate.now());
         student.setFirstName("Naruto");
         student.setLastName("Uzumaki");
         student.setVersion(1);

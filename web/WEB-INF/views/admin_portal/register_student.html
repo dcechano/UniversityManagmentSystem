@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/styles.css}">
     <title>Register a new Student</title>
 </head>
 <body>
 <div class="container mx-auto my-5">
     <form action="" th:action="@{save_student}" th:object="${student}" method="post">
-        <div class="card border-info">
-            <h3 class="h3 text-center card-header badge-info">Register New Student</h3>
+        <div id="form-box" class="card">
+            <h3 class="h3 text-center card-header green">Register New Student</h3>
 
             <div class="my-3">
                 <div class="form-group col-5 m-auto">
@@ -23,7 +24,7 @@
                 <div class="form-group col-5 m-auto">
                     <label for="password">Password</label>
                     <input type="text" class="form-control" id="password" th:field="*{password}">
-                    <input class="btn btn-primary form-control mt-3" type="submit" value="Register">
+                    <input class="btn green form-control mt-3" type="submit" value="Register">
                 </div>
                 <input hidden="hidden" th:field="*{enrollmentDate}" th:value="${T(java.time.LocalDateTime).now()}">
             </div>

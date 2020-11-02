@@ -20,27 +20,54 @@
     </div>
 </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" id="nav-logo" href="#" th:href="@{/}">ASU</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <!--    <a class="navbar-brand" id="nav-logo" href="#" th:href="@{/}">ASU</a>-->
+    <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--        <span class="navbar-toggler-icon"></span>-->
+    <!--    </button>-->
+    <!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+    <!--        <ul class="navbar-nav mr-auto">-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#" th:href="@{/}">Home<span class="sr-only">(current)</span></a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#" th:href="@{manage_db}">Manage Database</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" th:href="@{register_student}" href="#" tabindex="-1">Register New Student</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" th:href="@{register_faculty}" href="#" tabindex="-1">Register New Faculty</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--        <ul class="navbar-nav">-->
+    <!--            <li class="nav-item active" sec:authorize="${!isAuthenticated()}">-->
+    <!--                <a class="nav-link" href="#" th:href="@{login}">Log In</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+
+    <!--    </div>-->
+    <!--</nav>-->
+
+    <nav class="nav">
+        <ul class="links">
                 <li class="nav-item active">
                     <a class="nav-link" href="#" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" th:href="@{list_students}">Manage Database</a>
+                    <a class="nav-link" href="#" th:href="@{manage_db}">Manage Database</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{register_student}" href="#" tabindex="-1">Register New Student</a>
+                    <a class="nav-link" th:href="@{register_student}" href="#">Register New Student</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{register_faculty}" href="#" tabindex="-1">Register New Faculty</a>
+                    <a class="nav-link" th:href="@{register_faculty}" href="#">Register New Faculty</a>
                 </li>
             </ul>
-            <ul class="navbar-nav">
+            <ul class="login-links">
                 <li class="nav-item active" sec:authorize="${!isAuthenticated()}">
                     <a class="nav-link" href="#" th:href="@{login}">Log In</a>
                 </li>
@@ -48,9 +75,9 @@
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
-
-        </div>
     </nav>
+
+
 <script th:src="@{/static/js/app.js}"></script>
 </body>
 </html>

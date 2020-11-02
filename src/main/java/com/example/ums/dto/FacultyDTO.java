@@ -104,7 +104,6 @@ public class FacultyDTO {
         facultyMember.setId(id);
         facultyMember.setFirstName(firstName);
         facultyMember.setLastName(lastName);
-        facultyMember.setUsername(firstName.charAt(0) + lastName);
         facultyMember.setPassword(password);
         facultyMember.setStatus(EmploymentStatus.FULL_TIME);
         facultyMember.setHiringDate(LocalDate.parse(hiringDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));

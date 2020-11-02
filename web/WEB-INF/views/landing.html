@@ -3,111 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <!-- TODO Remove unnecessary comments-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/static/css/styles.css}" href="/static/css/styles.css">
     <title>Landing</title>
 </head>
 <body>
-    <header th:fragment="header">
-        <div class="banner" id="univ-name">
-            <div>
-                <span class="cursive">A</span>merican
-                <span class="cursive">S</span>amoa
-                <span class="cursive">U</span>niversity
-            </div>
+<header th:fragment="header">
+    <div class="banner" id="univ-name" th:fragment="banner">
+        <div>
+            <span class="cursive">A</span>merican
+            <span class="cursive">S</span>amoa
+            <span class="cursive">U</span>niversity
         </div>
+    </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" id="nav-logo" href="#">ASU</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#" th:href="@{/}">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#" th:href="@{schedule_tour}">Visit</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#" tabindex="-1">Apply</a>
-                    </li>
-                    <li class="nav-item  active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            About
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item nav-link" href="#">History</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item nav-link" href="#">Mission Statement</a>
-                        </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Diversity</a>
-                    </li>
-                    <li class="nav-item active" sec:authorize="hasRole('ROLE_STUDENT')">
-                        <a class="nav-link" th:href="@{'/student_portal/' + ${session.user.getId()} + '/'}">Student Portal</a>
-                    </li>
-                    <li class="nav-item active" sec:authorize="hasRole('ROLE_FACULTY_MEMBER')">
-                        <a th:href="@{'/faculty_portal/' + ${session.user.getId()} + '/'}" class="nav-link">Faculty Portal</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item active" sec:authorize="${!isAuthenticated()}">
-                        <a class="nav-link" href="#" th:href="@{login}">Log In</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{logout}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    
-    <section id="section1">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <!--TODO replace the placeholder text with meaningful text-->
-                <h1 class="display-4">American Samoa University</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <a class="btn green btn-lg" href="#" role="button">Learn more</a>
-            </div>
-        </div>
-    </section>
+    <!--<nav class="navbar-nav navbar-expand-lg navbar-light bg-light">-->
+    <!--    <a class="navbar-brand" id="nav-logo" href="#">ASU</a>-->
+    <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--        <span class="navbar-toggler-icon"></span>-->
+    <!--    </button>-->
+    <!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+    <!--        TODO fix this so that the buttons space out and take up entire navbar-->
+    <!--        <ul class="links">-->
+    <!--        <ul class="navbar-nav mr-auto links">-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#" th:href="@{/}">Home</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#" th:href="@{schedule_tour}">Visit</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#" tabindex="-1">Apply</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item  active dropdown">-->
+    <!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <!--                    About-->
+    <!--                </a>-->
+    <!--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+    <!--                    <a class="dropdown-item nav-link" href="#">History</a>-->
+    <!--                    <div class="dropdown-divider"></div>-->
+    <!--                    <a class="dropdown-item nav-link" href="#">Mission Statement</a>-->
+    <!--                </div>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" href="#">Diversity</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active" sec:authorize="hasRole('ROLE_STUDENT')">-->
+    <!--                <a class="nav-link" th:href="@{'/student_portal/' + ${session.user.getId()} + '/'}">Student Portal</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active" sec:authorize="hasRole('ROLE_FACULTY_MEMBER')">-->
+    <!--                <a th:href="@{'/faculty_portal/' + ${session.user.getId()} + '/'}" class="nav-link">Faculty Portal</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">-->
+    <!--                <a th:href="@{/admin/}" class="nav-link">Administrator Portal</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--        <ul class="navbar-nav">-->
+    <!--            <li class="nav-item active" sec:authorize="${!isAuthenticated()}">-->
+    <!--                <a class="nav-link" href="#" th:href="@{login}">Log In</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{logout}">Logout</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <!--</nav>-->
+    <nav class="nav">
+        <ul class="links">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{schedule_tour}">Visit</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Diversity</a>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    About
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item nav-link" href="#">History</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item nav-link" href="#">Mission Statement</a>
+                </div>
+            </li>
+            <li class="nav-item active" sec:authorize="hasRole('ROLE_STUDENT')">
+                <a class="nav-link" th:href="@{'/student_portal/' + ${session.user.getId()} + '/'}">Student Portal</a>
+            </li>
+            <li class="nav-item active" sec:authorize="hasRole('ROLE_FACULTY_MEMBER')">
+                <a th:href="@{'/faculty_portal/' + ${session.user.getId()} + '/'}" class="nav-link">Faculty Portal</a>
+            </li>
+            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/admin/}" class="nav-link">Administrator Portal</a>
+            </li>
+        </ul>
+        <ul class="login-links">
+            <li style="list-style: none" class="nav-item active" sec:authorize="${!isAuthenticated()}">
+                <a class="nav-link" href="#" th:href="@{login}">Log In</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{logout}">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-    <section id="section2">
-        <h2>See What Our Campus Has to Offer</h2>
-        <hr style="height: 0.5px; background-color: white; width: 75%">
-        <div class="flex">
-            <div class="column">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-                <a href="#" >Learn more</a>
-            </div>
-            <div class="column">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-                <a href="#" >Learn more</a>
-            </div>
-            <div class="column">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-                <a href="#" >Learn more</a>
-            </div>
+<main>
+
+<section id="section1">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <!--TODO replace the placeholder text with meaningful text-->
+            <h1 class="display-4">American Samoa University</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+                to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a class="btn green btn-lg" href="#" role="button">Learn more</a>
         </div>
-    </section>
-    
-    <footer>
-        <div style="display: flex; flex-direction: column">
-            <a href="#" class="footer-tags">About</a>
-            <a href="#" class="footer-tags">Contact</a>
-            <a href="" class="footer-tags">Privacy Notice</a>
+    </div>
+</section>
+
+<section id="section2">
+    <h2>See What Our Campus Has to Offer</h2>
+    <hr style="height: 0.5px; background-color: white; width: 75%">
+    <div class="flex">
+        <div class="column">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
+            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+            <a href="#" class="link">Learn more</a>
         </div>
-        <a href="https://www.github.com/dcechano">GitHub</a>
-    </footer>
-    <script th:src="@{/static/js/app.js}"></script>
+        <div class="column">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
+            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+            <a href="#" class="link">Learn more</a>
+        </div>
+        <div class="column">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
+            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+            <a href="#" class="link">Learn more</a>
+        </div>
+    </div>
+</section>
+<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet explicabo ipsam nihil omnis rerum, velit! Ab, aut natus. Adipisci, animi excepturi incidunt libero molestias officiis recusandae similique? Maxime rerum, tempora. Animi aut blanditiis consequatur eum ex expedita, id ipsam, iste iure libero minus numquam quibusdam quisquam rem similique sit tenetur ut, vero. Beatae distinctio facere fugit nemo totam. Animi aut delectus eaque, esse et mollitia nisi, non nostrum numquam omnis quas quod, saepe tempore. Autem cumque debitis deleniti, dolor doloribus earum error eveniet excepturi inventore nam nesciunt nobis, non nulla omnis optio porro tempore. Ex omnis repellendus ullam vel voluptas. A aut dignissimos distinctio, ducimus error est facere illo, labore libero, nesciunt non nulla officia perspiciatis sapiente tempore! Autem earum illum in iste itaque magnam nemo omnis possimus quibusdam quo quod rem, rerum veritatis. Accusantium assumenda at debitis, delectus dolorem, enim, excepturi explicabo fugiat fugit harum ipsa maxime modi mollitia odio perferendis quae quia quibusdam repudiandae sapiente voluptatem? A animi aperiam assumenda, commodi consequatur deleniti eligendi enim, fugit hic iure nesciunt pariatur perspiciatis reiciendis sit tempore unde voluptatibus. Dolore doloribus expedita inventore libero optio reprehenderit sit? Alias doloremque dolores harum hic incidunt libero magnam molestias nihil, pariatur quae quaerat quisquam repellendus rerum soluta temporibus! Ad, blanditiis eius eos excepturi facilis hic id iste minus modi necessitatibus numquam odit possimus reprehenderit repudiandae saepe tempore totam velit, vitae? Alias aut commodi, cum cumque deleniti dicta dolore error eum eveniet fugiat fugit inventore ipsam maiores non odit placeat possimus quaerat quisquam reiciendis repellendus tempora temporibus tenetur, veniam vero voluptatum. A accusantium eum hic nesciunt? Adipisci, animi, aperiam asperiores assumenda dolores eos expedita in iusto laborum magnam nam nisi quam quidem quis ratione sint sunt tempore vero vitae voluptates! Assumenda distinctio molestias obcaecati soluta voluptatem? Accusamus adipisci aperiam assumenda atque commodi consequatur cumque delectus deleniti deserunt dicta dolor dolorem dolorum eligendi error esse eum ex illo minus modi molestiae mollitia neque nobis nostrum omnis optio perferendis possimus, praesentium quasi quo quod quos ratione reiciendis, rem sunt vero vitae voluptates. Aut ipsa minima quas rem totam! Consequatur delectus eos eveniet id laboriosam, minima natus nobis numquam, officiis optio pariatur porro possimus quaerat qui quisquam sunt velit. Ad eaque error molestias quia, repellendus sed ullam veritatis! Accusantium ad, amet architecto atque debitis dignissimos dolor enim est inventore, itaque iure molestiae nihil praesentium repellendus, voluptas? Eligendi eveniet iste reprehenderit. Aut commodi dolorem doloremque eaque, esse, et ipsa, laboriosam molestias nihil optio pariatur quam quasi qui saepe sequi sit tempore ullam voluptate voluptatem voluptates? Ab autem blanditiis consequatur cumque eum ipsa nisi odio repellat vero. Dolores illum magnam quo quod soluta voluptate. Commodi dolorum facere itaque magnam minima molestiae suscipit veritatis. Adipisci autem consequuntur culpa dicta enim ex excepturi explicabo ipsam ipsum labore nemo neque officia, quaerat quibusdam, reiciendis rem rerum. Adipisci dolore dolorem fugiat minima possimus praesentium saepe temporibus ut. At consequatur cupiditate earum error exercitationem fugiat id iure nesciunt pariatur, quaerat repellat tempora, ut voluptatum! Ab at culpa dignissimos doloremque facere maxime quis reiciendis soluta.</p>-->
+</main>
+    <footer th:fragment="footer">
+    <div style="display: flex; flex-direction: column">
+        <a href="#" class="footer-tags link">About</a>
+        <a href="#" class="footer-tags link">Contact</a>
+        <a href="" class="footer-tags link">Privacy Notice</a>
+    </div>
+    <a href="https://www.github.com/dcechano" class="link" target="_blank">GitHub</a>
+</footer>
+
+<script th:src="@{/static/js/app.js}"></script>
 </body>
 </html>
