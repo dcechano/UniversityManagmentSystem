@@ -15,7 +15,6 @@ public class CourseGradeKey implements Serializable {
     private Long courseId;
 
     public CourseGradeKey() {
-
     }
 
     public CourseGradeKey(Long studentId, Long courseId) {

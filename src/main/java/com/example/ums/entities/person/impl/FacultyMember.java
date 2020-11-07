@@ -21,7 +21,6 @@ public class FacultyMember extends Person {
     @OneToMany(mappedBy = "instructor", cascade = {CascadeType.REMOVE})
     private List<Course> courses;
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT")
     private Department department;

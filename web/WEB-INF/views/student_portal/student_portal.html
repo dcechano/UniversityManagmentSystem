@@ -23,37 +23,37 @@
 
     <div class="container my-5 mx-auto">
 
-        <!-- TODO Add Announcements -->
         <div class="card my-5">
-            <div class="card-header">
-                <p class="card-title">Announcements</p>
-            </div>
+            <div class="card-header green">Announcements</div>
             <div class="card-body">
-                <p class="card-text">This is an upcoming announcement!</p>
-                <a href="#" class="card-link">More info</a>
+                <div class="card-text">This is an upcoming announcement!</div>
+                <a class="card-link" href="#">More info</a>
             </div>
         </div>
-        <!-- TODO add Register for classes -->
+
         <div class="card my-5">
-            <div class="card-header">
-                <p class="card-title">Manage Schedule</p>
-            </div>
+            <div class="card-header green">Manage Schedule</div>
             <div class="card-body">
                 <div class="card-text">Register, add and drop classes here!</div>
                 <a class="card-link" th:href="@{manage}">Add/Drop classes</a>
             </div>
         </div>
-        <!-- TODO add link for Current class schedule -->
+
         <div class="card my-5">
-            <div class="card-header">
-                <p class="card-title">View Schedule</p>
-            </div>
+            <div class="card-header green">View Schedule</div>
             <div class="card-body">
                 <div class="card-text">View Schedule</div>
                 <a class="card-link" th:href="@{schedule}">Show Schedule</a>
             </div>
         </div>
-        <!-- TODO add link for Check grades -->
+
+        <div class="card my-5">
+            <div class="card-header green">Show Current Grades</div>
+            <div class="card-body">
+                <div class="card-text">Current Grades</div>
+                <a class="card-link" th:href="@{student_grades}">Show Grades</a>
+            </div>
+        </div>
     </div>
 </main>
 

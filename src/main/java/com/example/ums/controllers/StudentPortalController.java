@@ -2,10 +2,12 @@ package com.example.ums.controllers;
 
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
+import com.example.ums.entities.CourseGradeKey;
 import com.example.ums.entities.Department;
 import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
+import com.example.ums.repos.CourseGradeRepo;
 import com.example.ums.repos.CourseRepo;
 import com.example.ums.repos.DepartmentRepo;
 import com.example.ums.repos.StudentRepo;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Controller
 @SessionAttributes(names = {"user", "student"})
@@ -27,6 +30,8 @@ public class StudentPortalController {
     private StudentRepo studentRepo;
 
     private CourseRepo courseRepo;
+
+    private CourseGradeRepo courseGradeRepo;
 
 
     @GetMapping
@@ -41,17 +46,19 @@ public class StudentPortalController {
     }
 
     @GetMapping("/schedule")
-    public String studentSchedule(Model model, @PathVariable("id") Long id ,@ModelAttribute("student") Student student){
+    public String studentSchedule(Model model, @ModelAttribute("student") Student student){
         List<ScheduleDTO> schedule = courseRepo.findScheduleByStudentId(student.getId());
         model.addAttribute("schedule", schedule);
         return "student_portal/student_schedule";
     }
 
     @GetMapping("/manage")
-    public String manage(Model model) {
+    public String manage(Model model, @ModelAttribute("student") Student student) {
         var departments = departmentRepo.findAll();
+        List<ScheduleDTO> schedule = courseRepo.findScheduleByStudentId(student.getId());
 
         model.addAttribute("departments", departments);
+        model.addAttribute("schedule", schedule);
         return "student_portal/manage";
     }
 
@@ -73,14 +80,27 @@ public class StudentPortalController {
             Optional<Course> courseOptional = courseRepo.findById(courseId);
             courseOptional.ifPresentOrElse(course -> {
                         List<CourseGrade> courseGrades = student.getCourseGrades();
-                        CourseGrade courseGrade = new CourseGrade(student.getId(), courseId, course);
+                        CourseGrade courseGrade = new CourseGrade(student.getId(), courseId);
                         courseGrades.add(courseGrade);
+                        courseGradeRepo.save(courseGrade);
                         studentRepo.merge(student);
                     },
                     () -> {
                         throw new EntityNotFoundException("Course with Id: " + courseId + " could not be found");});
 
-        return "student_portal/manage";
+        return "redirect:manage";
+    }
+
+    @GetMapping("/drop_course")
+    public String removeCourse(@RequestParam("course_id") Long courseId, @RequestParam("student_id") Long studentId) {
+        courseGradeRepo.deleteById(new CourseGradeKey(studentId, courseId));
+        return "redirect:schedule";
+    }
+
+    @GetMapping("/student_grades")
+    public String studentGrades(@ModelAttribute("student") Student student, Model model){
+        model.addAttribute("courseGrades", student.getCourseGrades());
+        return "student_portal/grades";
     }
 
 
@@ -99,4 +119,8 @@ public class StudentPortalController {
         this.departmentRepo = departmentRepo;
     }
 
+    @Autowired
+    public void setCourseGradeRepo(CourseGradeRepo courseGradeRepo) {
+        this.courseGradeRepo = courseGradeRepo;
+    }
 }
