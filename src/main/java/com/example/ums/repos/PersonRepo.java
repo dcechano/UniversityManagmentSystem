@@ -8,5 +8,4 @@ public interface PersonRepo extends AbstractRepo<Person> {
 
     Person findByUsername(String username);
 
-    EntityManager getEntityManager();
 }

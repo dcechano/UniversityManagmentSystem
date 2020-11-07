@@ -16,13 +16,6 @@ import java.util.logging.Logger;
 @Transactional
 public class PersonRepoImpl extends AbstractRepoImpl<Person> implements PersonRepo {
 
-//    TODO remove later
-    @Autowired
-    private ApplicationContext applicationContext;
-
-    @Autowired
-    private RoleRepo roleRepo;
-
     public PersonRepoImpl() {
         super(Person.class);
     }
@@ -37,11 +30,6 @@ public class PersonRepoImpl extends AbstractRepoImpl<Person> implements PersonRe
         query.setParameter("username", username);
         return query.getSingleResult();
     }
-
-    public EntityManager getEntityManager() {
-        return this.entityManager;
-    }
-
 }
 
 

@@ -63,7 +63,7 @@ public class FacultyPortalController {
         List<CourseGrade> courseGrades = courseGradeDTO.getCourseGrades();
         courseGradeRepo.merge(courseGrades);
 
-        return "faculty_portal/courses";
+        return "redirect:courses";
     }
 
     @Autowired

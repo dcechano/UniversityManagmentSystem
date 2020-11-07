@@ -16,31 +16,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}">
 
-    <title th:text="${student.firstName + '''s Schedule'}">Student Schedule</title>
+    <title>Student Grades</title>
 </head>
 <body>
 <main>
+
     <div class="container">
-        <h1 class="my-2 font-weight-light"
-            th:text="${student.firstName + ' ' + student.lastName + '''s Schedule'}"></h1>
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Course</th>
                 <th scope="col">Instructor</th>
-                <th scope="col"></th>
+                <th scope="col">Grade</th>
             </tr>
             </thead>
-            <tbody th:each="item : ${schedule}">
+            <tbody th:each="courseGrade : ${courseGrades}">
             <tr>
-                <td th:text="${item.course}"></td>
-                <td th:text="${item.instructor}"></td>
+                <td th:text="${courseGrade.course.name}"></td>
+                <td th:text="${courseGrade.course.instructor.firstName + ' ' + courseGrade.course.instructor.lastName}"></td>
+                <td th:text="${courseGrade.grade.getCode()}"></td>
             </tr>
             </tbody>
         </table>
+        <a class="btn green" th:href="@{'/student_portal/' + ${student.id} + '/'}">Back to portal</a>
     </div>
 </main>
-<footer th:replace="/landing.html::footer"></footer>
-
+<footer th:replace="landing.html::footer"></footer>
 </body>
 </html>

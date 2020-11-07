@@ -212,11 +212,11 @@ footer {
     font-family: var(--roboto);
     height: 100px;
     width: 100%;
-    /*padding: 1rem;*/
+    padding: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /*margin-bottom: -100px;*/
+    margin-top: 1rem;
     clear: both;
 }
 
@@ -249,3 +249,9 @@ footer {
 #db_table a {
     color: #dc3545;
 }
+
+.fa-trash {
+    float: right;
+    display: inline;
+}
+

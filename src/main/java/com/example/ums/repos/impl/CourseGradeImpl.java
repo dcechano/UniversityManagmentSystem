@@ -24,9 +24,7 @@ public class CourseGradeImpl implements CourseGradeRepo {
 
     @Override
     public void save(List<CourseGrade> entityList) {
-        for (CourseGrade courseGrade : entityList) {
-            save(courseGrade);
-        }
+        entityList.forEach(this::save);
     }
 
     @Override

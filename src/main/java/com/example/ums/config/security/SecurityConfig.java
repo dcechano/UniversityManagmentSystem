@@ -66,7 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().csrfTokenRepository(repo());
 //    }
 
-//   TODO Fix the logout functionality
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 

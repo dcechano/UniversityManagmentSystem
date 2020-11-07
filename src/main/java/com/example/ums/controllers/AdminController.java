@@ -24,24 +24,18 @@ import java.util.logging.Logger;
 @Controller
 public class AdminController {
 
-    private final Logger logger = Logger.getLogger(getClass().toString());
-
     private StudentRepo studentRepo;
-    //    TODO potentially remove this repo if unnecessary
-    @Autowired
+
     private PersonRepo personRepo;
-    @Autowired
+
     private FacultyMemberRepo facultyMemberRepo;
-    @Autowired
+
     private PersonService personService;
 
-    @Autowired
     private RoleRepo roleRepo;
 
-    @Autowired
     private DepartmentRepo departmentRepo;
 
-    private PasswordEncoder passwordEncoder;
 
 
     @RequestMapping
@@ -157,7 +151,27 @@ public class AdminController {
     }
 
     @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public void setPersonRepo(PersonRepo personRepo) {
+        this.personRepo = personRepo;
+    }
+
+    @Autowired
+    public void setFacultyMemberRepo(FacultyMemberRepo facultyMemberRepo) {
+        this.facultyMemberRepo = facultyMemberRepo;
+    }
+
+    @Autowired
+    public void setPersonService(PersonService personService) {
+        this.personService = personService;
+    }
+
+    @Autowired
+    public void setRoleRepo(RoleRepo roleRepo) {
+        this.roleRepo = roleRepo;
+    }
+
+    @Autowired
+    public void setDepartmentRepo(DepartmentRepo departmentRepo) {
+        this.departmentRepo = departmentRepo;
     }
 }

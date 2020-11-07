@@ -5,7 +5,7 @@ public enum Grade {
     B("B"), BMinus("B-"),
     C("C"), CMinus("C-"),
     D("D"), DMinus("D-"),
-    E("E");
+    E("E"), NO_GRADE("NG");
 
     private String code;
 
