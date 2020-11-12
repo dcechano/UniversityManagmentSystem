@@ -31,6 +31,7 @@
                     <label for="date">Date of tour</label>
                     <input class="form-control" type="datetime-local" id="date" th:field="*{scheduledFor}">
                     <input class="btn green form-control mt-3" type="submit" value="Schedule Tour">
+                    <a class="btn green form-control mt-3" th:href="@{/}">Cancel</a>
                 </div>
             </div>
         </div>

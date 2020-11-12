@@ -6,10 +6,8 @@ import com.example.ums.enums.AcademicStatus;
 import com.example.ums.repos.StudentRepo;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityGraph;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("unchecked")

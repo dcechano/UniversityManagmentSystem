@@ -1,10 +1,10 @@
 package com.example.ums.controllers;
 
+import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.CourseGradeKey;
 import com.example.ums.entities.Department;
-import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseGradeRepo;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Controller
 @SessionAttributes(names = {"user", "student"})

@@ -5,20 +5,17 @@ import com.example.ums.entities.Department;
 import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.entities.person.impl.Student;
 import com.example.ums.enums.AcademicStatus;
-import com.example.ums.enums.EmploymentStatus;
 import com.example.ums.enums.RoleEnum;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.*;
 import com.example.ums.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @RequestMapping("/admin/")
 @Controller
@@ -35,7 +32,6 @@ public class AdminController {
     private RoleRepo roleRepo;
 
     private DepartmentRepo departmentRepo;
-
 
 
     @RequestMapping
@@ -91,7 +87,6 @@ public class AdminController {
     public String saveFaculty(@ModelAttribute("faculty") FacultyDTO facultyDTO) {
         FacultyMember facultyMember = facultyDTO.getFacultyMember();
         facultyMember.setRoles(List.of(roleRepo.getRoleByName(RoleEnum.ROLE_FACULTY_MEMBER.name())));
-        facultyMember.setStatus(EmploymentStatus.PART_TIME);
         personService.save(facultyMember);
 
         return "redirect:/admin/";
@@ -107,7 +102,6 @@ public class AdminController {
                     dto.setDepartments(departments);
                     model.addAttribute("faculty", dto);
                     model.addAttribute("departments", departments);
-
                 },
                 () -> {
                     throw new EntityNotFoundException("Faculty Member with id: " + id + " could not be found");

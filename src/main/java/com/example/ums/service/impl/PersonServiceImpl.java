@@ -1,7 +1,6 @@
 package com.example.ums.service.impl;
 
 import com.example.ums.entities.person.Person;
-import com.example.ums.enums.RoleEnum;
 import com.example.ums.repos.PersonRepo;
 import com.example.ums.repos.RoleRepo;
 import com.example.ums.service.PersonService;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

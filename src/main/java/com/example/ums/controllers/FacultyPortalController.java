@@ -3,7 +3,6 @@ package com.example.ums.controllers;
 import com.example.ums.entities.CourseGrade;
 import com.example.ums.entities.CourseGradeDTO;
 import com.example.ums.entities.person.impl.FacultyMember;
-import com.example.ums.entities.person.impl.Student;
 import com.example.ums.ex.EntityNotFoundException;
 import com.example.ums.repos.CourseGradeRepo;
 import com.example.ums.repos.CourseRepo;

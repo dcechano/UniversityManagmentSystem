@@ -1,8 +1,8 @@
 package com.example.ums.repos.impl;
 
+import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.entities.Course;
 import com.example.ums.entities.CourseGrade;
-import com.example.ums.dto.ScheduleDTO;
 import com.example.ums.repos.CourseRepo;
 import org.springframework.stereotype.Repository;
 
