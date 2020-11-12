@@ -14,3 +14,4 @@ for (var i = 0; i < links.length; i++) {
         this.style.transition = '0.2s';
     });
 }
+

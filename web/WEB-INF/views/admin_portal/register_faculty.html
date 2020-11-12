@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group col-5 m-auto">
                     <label for="dep_select" th:text="Department"></label>
-                    <select id="dep_select" class="custom-select-lg" th:field="*{depName}">
+                    <select id="dep_select" class="custom-select-sm" th:field="*{depName}">
                         <option th:each="dep : *{departments}" th:value="${dep.name}" th:text="${dep.name}"></option>
                     </select>
 
@@ -43,6 +43,11 @@
                         <input th:hidden="true" th:field="*{departments[__${itemStat.index}__].version}">
                     </div>
 
+                    <label for="status">Employment Status</label>
+                    <select id="status" th:field="*{employmentStatus}">
+                        <option th:each="status : ${T(com.example.ums.enums.EmploymentStatus).values()}"
+                                th:value="${status}" th:text="${status.toString()}" class="custom-select-sm"></option>
+                    </select>
                     <input class="btn green form-control mt-3" type="submit" value="Register">
                 </div>
             </div>

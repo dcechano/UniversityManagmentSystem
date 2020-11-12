@@ -13,19 +13,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
     <link rel="stylesheet" th:href="@{/static/css/styles.css}" href="/static/css/styles.css">
-    <title>Landing</title>
+    <title>American Samoa University</title>
 </head>
 <body>
 <header th:fragment="header">
-    <div class="banner" id="univ-name" th:fragment="banner">
-        <div>
-            <span class="cursive">A</span>merican
-            <span class="cursive">S</span>amoa
-            <span class="cursive">U</span>niversity
+    <a th:href="@{/}" id="banner-link" th:fragment="banner-link">
+        <div class="banner" id="univ-name" th:fragment="banner">
+            <div>
+                <span class="cursive">A</span>merican
+                <span class="cursive">S</span>amoa
+                <span class="cursive">U</span>niversity
+            </div>
         </div>
-    </div>
-
+    </a>
     <nav class="nav">
         <ul class="links">
             <li class="nav-item active">
@@ -39,6 +42,9 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Diversity</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Research</a>
             </li>
             <li class="nav-item active dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -74,45 +80,130 @@
 
 <main>
 
-<section id="section1">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">American Samoa University</h1>
-            <p class="lead">Get a world class education in a literal paradise.</p>
-            <hr class="my-4">
-            <a class="btn green btn-lg" href="#" role="button">Learn more</a>
+    <section id="section1">
+        <div class="jumbotron jumbotron-fluid">
+            <ul class="slideshow">
+                <li class="image">
+                    <div class="container">
+                        <h1 class="display-4">American Samoa University</h1>
+                        <p class="lead">Get a world class education in a literal paradise.</p>
+                        <hr class="my-4">
+                        <a class="btn green btn-lg" href="#">Learn more</a>
+                    </div>
+                </li>
+                <li class="image">
+                    <div class="container">
+                        <h1 class="display-4">American Samoa University</h1>
+                        <p class="lead">Learn the skills to take on the world.</p>
+                        <hr class="my-4">
+                        <a class="btn green btn-lg" href="#">Learn more</a>
+                    </div>
+                </li>
+                <li class="image">
+                    <div class="container">
+                        <h1 class="display-4">American Samoa University</h1>
+                        <p class="lead">Our academic resources are the gold standard for universities around the world.</p>
+                        <hr class="my-4">
+                        <a class="btn green btn-lg" href="#">Learn more</a>
+                    </div>
+                </li>
+                <li class="image">
+                    <div class="container">
+                        <h1 class="display-4">American Samoa University</h1>
+                        <p class="lead">We're a research university that has been breaking ground for decades.</p>
+                        <hr class="my-4">
+                        <a class="btn green btn-lg" href="#">Learn more</a>
+                    </div>
+                </li>
+                <li class="image">
+                    <div class="container">
+                        <h1 class="display-4">American Samoa University</h1>
+                        <p class="lead">Visit our stunning campus.</p>
+                        <hr class="my-4">
+                        <a class="btn green btn-lg" href="#">Learn more</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="section2">
-    <h2>See What Our Campus Has to Offer</h2>
-    <hr style="height: 0.5px; background-color: white; width: 75%">
-    <div class="flex">
-        <div class="column">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
-            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-            <a href="#" class="link">Learn more</a>
+    <section id="section2">
+        <h2>See What Our Campus Has to Offer</h2>
+        <hr class="hr asu-hr">
+        <div class="flex">
+            <div class="column">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste
+                itaque
+                labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+                <a href="#" class="link">Learn more <span class="fa fa-chevron-right"></span></a>
+            </div>
+            <div class="column">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste
+                itaque
+                labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+                <a href="#" class="link">Learn more <span class="fa fa-chevron-right"></span></a>
+            </div>
+            <div class="column">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste
+                itaque
+                labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
+                <a href="#" class="link">Learn more <span class="fa fa-chevron-right"></span></a>
+            </div>
         </div>
-        <div class="column">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
-            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-            <a href="#" class="link">Learn more</a>
+    </section>
+
+    <section id="section3" class="off-section">
+        <div class="wrap">
+            <h2>Upcoming Events</h2>
+            <hr class="hr bg-green">
+            <div class="d-inline-flex justify-content-between">
+                <div class="column">
+                    <h6 th:text="${date1.toString()}"></h6>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, aperiam commodi consequuntur dicta
+                    doloremque exercitationem fugiat harum hic ipsa molestias nesciunt pariatur repellat sed similique
+                    sint.
+                    Architecto, delectus, temporibus! Blanditiis culpa cumque delectus dolorem ea eligendi eum harum hic
+                    inventore magnam molestias natus obcaecati tempora tenetur, totam unde, voluptates voluptatum.
+                </div>
+                <div class="column">
+                    <h6 th:text="${date2.toString()}"></h6>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, aperiam commodi consequuntur dicta
+                    doloremque exercitationem fugiat harum hic ipsa molestias nesciunt pariatur repellat sed similique
+                    sint.
+                    Architecto, delectus, temporibus! Blanditiis culpa cumque delectus dolorem ea eligendi eum harum hic
+                    inventore magnam molestias natus obcaecati tempora tenetur, totam unde, voluptates voluptatum.
+                </div>
+                <div class="column">
+                    <h6 th:text="${date3.toString()}"></h6>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, aperiam commodi consequuntur dicta
+                    doloremque exercitationem fugiat harum hic ipsa molestias nesciunt pariatur repellat sed similique
+                    sint.
+                    Architecto, delectus, temporibus! Blanditiis culpa cumque delectus dolorem ea eligendi eum harum hic
+                    inventore magnam molestias natus obcaecati tempora tenetur, totam unde, voluptates voluptatum.
+                </div>
+            </div>
         </div>
-        <div class="column">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dignissimos et expedita fugit, iste itaque
-            labore magni nesciunt nulla, placeat possimus reprehenderit sed ullam. Voluptatibus.
-            <a href="#" class="link">Learn more</a>
+        <div id="newsletter">
+            <p class="font-weight-lighter">Sign up for our newsletter</p>
+            <form action="" th:action="@{/newsletter}" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="Email" class="form-control">
+                    <small class="form-text" style="color: white">We don't share emails with 3<sup>rd</sup>
+                        parties.</small>
+                </div>
+                <input type="submit" value="Submit" class="btn green">
+            </form>
         </div>
-    </div>
-</section>
+    </section>
 
 </main>
-    <footer th:fragment="footer">
+
+<footer th:fragment="footer">
     <div style="display: flex; flex-direction: column">
         <a href="#" class="footer-tags link">About</a>
         <a href="#" class="footer-tags link">Contact</a>
-        <a href="" class="footer-tags link">Privacy Notice</a>
+        <a href="#" class="footer-tags link">Privacy Notice</a>
     </div>
     <a href="https://www.github.com/dcechano" class="link" target="_blank">GitHub</a>
 </footer>

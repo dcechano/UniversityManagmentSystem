@@ -3,10 +3,6 @@ package com.example.ums.dto;
 import com.example.ums.entities.Department;
 import com.example.ums.entities.person.impl.FacultyMember;
 import com.example.ums.enums.EmploymentStatus;
-import com.example.ums.enums.RoleEnum;
-import com.example.ums.repos.RoleRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +16,7 @@ public class FacultyDTO {
     private String depName;
     private String hiringDate;
     private List<Department> departments;
+    private String employmentStatus;
 
 
     public FacultyDTO() {
@@ -32,6 +29,7 @@ public class FacultyDTO {
         password = facultyMember.getPassword();
         depName = facultyMember.getDepartment().getName();
         hiringDate = facultyMember.getHiringDate().toString();
+        employmentStatus = facultyMember.getStatus().getCode();
     }
 
     public Long getId() {
@@ -90,6 +88,14 @@ public class FacultyDTO {
         this.departments = departments;
     }
 
+    public String getEmploymentStatus() {
+        return employmentStatus;
+    }
+
+    public void setEmploymentStatus(String employmentStatus) {
+        this.employmentStatus = employmentStatus;
+    }
+
     public FacultyMember getFacultyMember() {
         Department department = null;
         for (Department dep : departments) {
@@ -105,7 +111,7 @@ public class FacultyDTO {
         facultyMember.setFirstName(firstName);
         facultyMember.setLastName(lastName);
         facultyMember.setPassword(password);
-        facultyMember.setStatus(EmploymentStatus.FULL_TIME);
+        facultyMember.setStatus(EmploymentStatus.valueOf(employmentStatus));
         facultyMember.setHiringDate(LocalDate.parse(hiringDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         facultyMember.setDepartment(department);
         return facultyMember;
