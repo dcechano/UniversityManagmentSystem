@@ -22,18 +22,18 @@ public class StudentRepoImpl extends AbstractRepoImpl<Student> implements Studen
 
     @Override
     public Program getMajorById(Long id) {
-        Student student = entityManager.find(Student.class, id);
+        Student student = this.entityManager.find(Student.class, id);
         return student.getMajor();
     }
 
     @Override
     public AcademicStatus getAcademicStatusById(Long id) {
-        return entityManager.find(Student.class, id).getStatus();
+        return this.entityManager.find(Student.class, id).getStatus();
     }
 
     @Override
     public Optional<Student> findStudentWithCourseGrades(Long id) {
-        TypedQuery<Student> query = entityManager.createQuery(
+        TypedQuery<Student> query = this.entityManager.createQuery(
                 "SELECT s FROM Student  s JOIN FETCH s.courseGrades WHERE s.id =: id", Student.class);
         query.setParameter("id", id);
         Student student = query.getSingleResult();
