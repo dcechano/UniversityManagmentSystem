@@ -30,11 +30,7 @@ public class PersonServiceImpl implements PersonService {
 
     private RoleRepo roleRepo;
 
-    @Autowired
-    private ApplicationContext securityContext;
-
     @Override
-
     public Person findByUsername(String username) {
         return personRepo.findByUsername(username);
     }
